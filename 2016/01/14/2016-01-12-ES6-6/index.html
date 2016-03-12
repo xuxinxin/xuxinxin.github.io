@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ES6 中的生成器 - 徐鑫鑫的BLOG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="生成器 generator语法123function *foo() &amp;#123;    // ..&amp;#125;
+* 的位置可以改变，写成下面的几种形式都可以:
+1234function *foo()  &amp;#123; .. &amp;#125;function* foo()  &amp;#123; .. &amp;#125;function * foo() &amp;#123; .. &amp;#125;function*foo()">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6 中的生成器">
+<meta property="og:url" content="http://yoursite.com/2016/01/14/2016-01-12-ES6-6/index.html">
+<meta property="og:site_name" content="徐鑫鑫的BLOG">
+<meta property="og:description" content="生成器 generator语法123function *foo() &amp;#123;    // ..&amp;#125;
+* 的位置可以改变，写成下面的几种形式都可以:
+1234function *foo()  &amp;#123; .. &amp;#125;function* foo()  &amp;#123; .. &amp;#125;function * foo() &amp;#123; .. &amp;#125;function*foo()">
+<meta property="og:updated_time" content="2016-01-14T03:17:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6 中的生成器">
+<meta name="twitter:description" content="生成器 generator语法123function *foo() &amp;#123;    // ..&amp;#125;
+* 的位置可以改变，写成下面的几种形式都可以:
+1234function *foo()  &amp;#123; .. &amp;#125;function* foo()  &amp;#123; .. &amp;#125;function * foo() &amp;#123; .. &amp;#125;function*foo()">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/webfonts/font-awesome-4.3.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+  <script src="/js/jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="container">
+    <div class="wrap">
+      <button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
+      <aside id="sidebar">
+    <div class="sidebar-wrap">
+        <button class="hide-button">
+            <i class="fa fa-angle-double-left"></i>
+        </button>
+        <button class="close-button fa fa-fw fa-close"></button>
+        <div class="logo">
+            <span>Star</span>
+            <img src="/images/logo-2.png" alt="LOGO"/>
+        </div>
+        <div class="intro">鲜花与掌声，献给时光</div>
+        <nav id="sidebar-nav">
+            
+            <a href="/"><i class="fa fa-bars"></i>Home</a>
+            
+            <a href="/archives"><i class="fa fa-bars"></i>Archives</a>
+            
+            <a href="/categories"><i class="fa fa-bars"></i>Categories</a>
+            
+            <a href="/tags"><i class="fa fa-bars"></i>Tags</a>
+            
+        </nav>
+        <div id="sidebar-bottom">
+            <ul class="social">
+                <li><a href=""><i class="fa fa-github"></i></a></li>
+                <li><a href=""><i class="fa fa-facebook"></i></a></li>
+                <li><a href=""><i class="fa fa-weibo"></i></a></li>
+                <li><a href=""><i class="fa fa-qq"></i></a></li>
+                <li><a href=""><i class="fa fa-weixin"></i></a></li>
+            </ul>
+            <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 star&nbsp;
+      - <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+        </div>
+    </div>
+</aside>
+      <section id="main" class="outer ml-has-sidebar"><article id="post-2016-01-12-ES6-6" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ES6 中的生成器
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/01/14/2016-01-12-ES6-6/" class="article-date">
+  <time datetime="2016-01-13T16:00:00.000Z" itemprop="datePublished">2016-01-14</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/code/">code</a><span>></span><a class="article-category-link" href="/categories/code/ES6/">ES6</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="u751F_u6210_u5668_generator"><a href="#u751F_u6210_u5668_generator" class="headerlink" title="生成器 generator"></a>生成器 generator</h1><h2 id="u8BED_u6CD5"><a href="#u8BED_u6CD5" class="headerlink" title="语法"></a>语法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// ..</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>*</code> 的位置可以改变，写成下面的几种形式都可以:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">foo</span>(<span class="params"></span>)  </span>&#123; .. &#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">foo</span>(<span class="params"></span>)  </span>&#123; .. &#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> * <span class="title">foo</span>(<span class="params"></span>) </span>&#123; .. &#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span>*<span class="title">foo</span>(<span class="params"></span>)   </span>&#123; .. &#125;</span><br></pre></td></tr></table></figure>
+<p>在对象字面量中，函数成员有简化形式，生成器同样也有:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">    *foo() &#123; .. &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="u8C03_u7528_u751F_u6210_u5668"><a href="#u8C03_u7528_u751F_u6210_u5668" class="headerlink" title="调用生成器"></a>调用生成器</h2><p>调用生成器和调用普通的函数一样，函数名加上 <code>()</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">foo();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 有参数的形式</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">foo</span>(<span class="params">x,y</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// ..</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo( <span class="number">5</span>, <span class="number">10</span> );</span><br></pre></td></tr></table></figure>
+<p>和普通函数的主要差别是调用生成器时，并不是直接运行生成器中的代码。而是会生成一个迭代器来控制生成器代码的运行。</p>
+<h2 id="yield"><a href="#yield" class="headerlink" title="<code>yield</code>"></a><code>yield</code></h2><p>生成器使用了一个新的关键字 <code>yield</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> x = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">var</span> y = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">yield</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> z = x + y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>普通的函数正常情况下从调用开始运行，一直到 <code>return ..</code> 语句结束运行。 而生成器则不是这样，它可以在代码运行的过程中停止， <code>yield</code> 关键字出现的位置就是停止点。</p>
+<p>在上面的例子中，前两行代码会先运行，然后遇到 <code>yield</code> ，后续的代码会暂停运行。使用迭代器 <code>next()</code> 恢复运行之后，最后一行代码才会执行。 注意，<code>yield</code> 能够在一个生成器中出现多次，也可以出现在循环当中:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="keyword">yield</span> <span class="built_in">Math</span>.random();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>yield</code> 不仅仅可以将值从函数中输出来，也可以通过迭代器的 <code>next(..)</code> 输入进函数:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> x = <span class="keyword">yield</span> <span class="number">10</span>;</span><br><span class="line">    <span class="built_in">console</span>.log( x );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>生成器首先在第一次停止的时候输出一个10，然后使用 <code>it.next(..)</code> 恢复生成器的时候，从 <code>next(..)</code> 传进来的参数会取代 <code>yield 10</code> 赋值给 <code>x</code>。</p>
+<p> <code>yield ..</code> 类似于一个赋值表达式 <code>a=..</code>, 赋值表达式可以出现的地方， <code>yield</code> 都可以出现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a, b;</span><br><span class="line"></span><br><span class="line">a = <span class="number">3</span>;                  <span class="comment">// valid</span></span><br><span class="line">b = <span class="number">2</span> + a = <span class="number">3</span>;          <span class="comment">// invalid</span></span><br><span class="line">b = <span class="number">2</span> + (a = <span class="number">3</span>);        <span class="comment">// valid</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">yield</span> <span class="number">3</span>;                <span class="comment">// valid</span></span><br><span class="line">a = <span class="number">2</span> + <span class="keyword">yield</span> <span class="number">3</span>;        <span class="comment">// invalid</span></span><br><span class="line">a = <span class="number">2</span> + (<span class="keyword">yield</span> <span class="number">3</span>);      <span class="comment">// valid</span></span><br></pre></td></tr></table></figure>
+<h2 id="yield_*"><a href="#yield_*" class="headerlink" title="<code>yield *</code>"></a><code>yield *</code></h2><p><code>yield *</code> 叫做yield 委托，在语法上 <code>yield * ..</code> 和 <code>yield</code> 表现的一样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">yield</span> *[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>yield * ..</code> 后面需要跟一个可迭代的值，然后调用这个迭代器，然后让迭代器接管这个生成器，直到迭代完毕：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">yield</span> *[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>数组 <code>[1,2,3]</code> 会生成一个迭代器遍历这些值，而 <code>*foo()</code> 生成器会一步一步输出这些值。</p>
+<p>另外 <code>yield *..</code> 后面还可以跟一个生成器:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">yield</span> *foo();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>*foo()</code> 输出的值，在 <code>*bar()</code> 中也会输出。看一个例子:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">4</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> x = <span class="keyword">yield</span> *foo();</span><br><span class="line">    <span class="built_in">console</span>.log( <span class="string">"x:"</span>, x );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> v <span class="keyword">of</span> bar()) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log( v );</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 1 2 3</span></span><br><span class="line"><span class="comment">// x: 4</span></span><br></pre></td></tr></table></figure>
+<p><code>1,2,3</code> 首先从 <code>*foo</code> 中输出，然后再从 <code>*bar()</code> 中输出，<code>4</code> 是 <code>*foo()</code> 的返回值，会用来给 <code>x</code> 赋值。</p>
+<p>生成器的控制与迭代器一样，通过 <code>next(), return(), throw()</code> 控制他继续运行，或者提前结束又或是抛出异常。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> it1 = foo();</span><br><span class="line">it1.next();             <span class="comment">// &#123; value: 1, done: false &#125;</span></span><br><span class="line">it1.next();             <span class="comment">// &#123; value: 2, done: false &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> it2 = foo();</span><br><span class="line">it2.next();             <span class="comment">// &#123; value: 1, done: false &#125;</span></span><br><span class="line"></span><br><span class="line">it1.next();             <span class="comment">// &#123; value: 3, done: false &#125;</span></span><br><span class="line"></span><br><span class="line">it2.next();             <span class="comment">// &#123; value: 2, done: false &#125;</span></span><br><span class="line">it2.next();             <span class="comment">// &#123; value: 3, done: false &#125;</span></span><br><span class="line"></span><br><span class="line">it2.next();             <span class="comment">// &#123; value: undefined, done: true &#125;</span></span><br><span class="line">it1.next();             <span class="comment">// &#123; value: undefined, done: true &#125;</span></span><br></pre></td></tr></table></figure>
+<p>上面这个例子说明了，可以通过多个迭代器同时控制一个生成器，并且互相之间相互不干扰。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">yield</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">yield</span> <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">yield</span> <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log( <span class="string">"cleanup!"</span> );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> v <span class="keyword">of</span> foo()) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log( v );</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 1 2 3</span></span><br><span class="line"><span class="comment">// cleanup!</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> it = foo();</span><br><span class="line"></span><br><span class="line">it.next();              <span class="comment">// &#123; value: 1, done: false &#125;</span></span><br><span class="line">it.return( <span class="number">42</span> );        <span class="comment">// cleanup!</span></span><br><span class="line">                        <span class="comment">// &#123; value: 42, done: true &#125;</span></span><br></pre></td></tr></table></figure>
+<p>上面这个例子说明了<code>foo..of..</code> 可以进行迭代器迭代工作，利用 <code>return</code> 可以提前结束生成器的执行，并且完成 <code>finally</code> 语句块中的清理工作。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">yield</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log( err );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">yield</span> <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">throw</span> <span class="string">"Hello!"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> it = foo();</span><br><span class="line"></span><br><span class="line">it.next();              <span class="comment">// &#123; value: 1, done: false &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    it.throw( <span class="string">"Hi!"</span> );  <span class="comment">// Hi!</span></span><br><span class="line">                        <span class="comment">// &#123; value: 2, done: false &#125;</span></span><br><span class="line">    it.next();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.log( <span class="string">"never gets here"</span> );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log( err ); <span class="comment">// Hello!</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面是一个错误处理的例子，首先调用生成器，返回一个迭代器赋值给 <code>it</code>, 调用 <code>it.next()</code> ，输出 <code>*foo</code> 中的 <code>try</code> 块中的 <code>yield 1</code> 的结果。</p>
+<p>然后主流程中的 <code>try</code> 语句中调用 <code>it.throw()</code> 抛出一个异常，生成器捕捉到这个基础进行输出。然后生成器继续执行到 <code>yield 2</code> 语句中止，输出 <code>{ value: 2, done: false }</code> 。然后主流程中的 <code>try</code> 块继续运行 <code>it.next()</code>， 生成器抛出一个异常， <code>it.next()</code> 没有得到<code>{done:true}</code>的结果，这个异常被主流程捕捉到进行输出。 </p>
+<h2 id="u5256_u6790_u751F_u6210_u5668"><a href="#u5256_u6790_u751F_u6210_u5668" class="headerlink" title="剖析生成器"></a>剖析生成器</h2><p>为了更好的理解生成器的原理，我们进行人工转换，将生成器转换成ES5的代码。</p>
+<p>首先，我们的生成器非常简单：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> x = <span class="keyword">yield</span> <span class="number">42</span>;</span><br><span class="line">    <span class="built_in">console</span>.log( x );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这是一个函数，调用这个函数返回一个迭代器：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">		next: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;..&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// we'll skip `return(..)` and `throw(..)`</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来分析这个 <code>next()</code> ， <code>next()</code> 返回值是 <code>{value: 42, done: false}</code> 和 <code>{value: undifined, done: true}</code>。所以有：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">		next: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="comment">// get value and state</span></span><br><span class="line">			<span class="keyword">return</span> &#123;value: value, done: state&#125;;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// we'll skip `return(..)` and `throw(..)`</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>生成器到完成状态，要调用两次next，那么我们设置两个状态：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> state = <span class="number">0</span></span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">		next: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="keyword">switch</span> (state) &#123; </span><br><span class="line">				<span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">					<span class="keyword">var</span> value = <span class="number">42</span>,</span><br><span class="line">					done = <span class="literal">false</span>;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">					value = <span class="literal">undefined</span>,</span><br><span class="line">					done = <span class="literal">true</span>;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			state ++ ;</span><br><span class="line">			<span class="keyword">return</span> &#123;value: value, done: done&#125;;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// we'll skip `return(..)` and `throw(..)`</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> it = foo();</span><br><span class="line"><span class="built_in">console</span>.log(it.next())  <span class="comment">// &#123;"value":42,"done":false&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(it.next())  <span class="comment">// &#123;"done":true&#125;</span></span><br></pre></td></tr></table></figure>
+<p>利用一个闭包来控制调用 <code>next</code> 的状态。但是这与我们的生成器还是有点不同，在第二次调用 <code>it.next()</code> 时，可以传入一个参数给 <code>x</code> 赋值，并且打印出来，所以我们可以改写一下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> state = <span class="number">0</span></span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">		next: <span class="function"><span class="keyword">function</span>(<span class="params">xx</span>) </span>&#123;</span><br><span class="line">			<span class="keyword">switch</span> (state) &#123; </span><br><span class="line">				<span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">					<span class="keyword">var</span> value = <span class="number">42</span>,</span><br><span class="line">					done = <span class="literal">false</span>;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">					value = <span class="literal">undefined</span>,</span><br><span class="line">					done = <span class="literal">true</span>;</span><br><span class="line">					<span class="keyword">var</span> x = xx;</span><br><span class="line">					<span class="built_in">console</span>.log(x);</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			state ++ ;</span><br><span class="line">			<span class="keyword">return</span> &#123;value: value, done: done&#125;;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// we'll skip `return(..)` and `throw(..)`</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那么一个生成器就这样该写出来了。</p>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>ES6 引入了生成器，生成器提供了很强大的功能：它允许你定义一个包含自有迭代算法的函数， 同时它可以自动维护自己的状态。</p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Generator/">Generator</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/02/23/2016-02-23-HTTP2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          拥抱HTTP 2.0
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/11/2016-01-11-ES6-5/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ES6 中的迭代器&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-2016-01-12-ES6-6" data-title="ES6 中的生成器" data-url="http://yoursite.com/2016/01/14/2016-01-12-ES6-6/">
+
+    </div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:'starow'};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</section>
+</section>
+    </div>
+    
+
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>

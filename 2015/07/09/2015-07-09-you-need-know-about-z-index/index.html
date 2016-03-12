@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>漫谈CSS—z-index - 徐鑫鑫的BLOG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在CSS 2.1 Section 9.9.1 - Specifying the stack level标准中, 第一句话就说了,对于一个定位的box,z-index属性确定了这个元素在当前堆叠上下文中的堆叠层级同时是建立一个新的堆叠上下文。
+没有z-index的堆叠如果没有元素拥有z-index元素,浏览器渲染元素的顺序是这样的:
+
+根元素的背景和边框
+正常流中的块元素
+浮动的块元素
+正常流中的内">
+<meta property="og:type" content="article">
+<meta property="og:title" content="漫谈CSS—z-index">
+<meta property="og:url" content="http://yoursite.com/2015/07/09/2015-07-09-you-need-know-about-z-index/index.html">
+<meta property="og:site_name" content="徐鑫鑫的BLOG">
+<meta property="og:description" content="在CSS 2.1 Section 9.9.1 - Specifying the stack level标准中, 第一句话就说了,对于一个定位的box,z-index属性确定了这个元素在当前堆叠上下文中的堆叠层级同时是建立一个新的堆叠上下文。
+没有z-index的堆叠如果没有元素拥有z-index元素,浏览器渲染元素的顺序是这样的:
+
+根元素的背景和边框
+正常流中的块元素
+浮动的块元素
+正常流中的内">
+<meta property="og:image" content="http://segmentfault.com/img/bVb4mg">
+<meta property="og:updated_time" content="2016-01-07T10:56:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="漫谈CSS—z-index">
+<meta name="twitter:description" content="在CSS 2.1 Section 9.9.1 - Specifying the stack level标准中, 第一句话就说了,对于一个定位的box,z-index属性确定了这个元素在当前堆叠上下文中的堆叠层级同时是建立一个新的堆叠上下文。
+没有z-index的堆叠如果没有元素拥有z-index元素,浏览器渲染元素的顺序是这样的:
+
+根元素的背景和边框
+正常流中的块元素
+浮动的块元素
+正常流中的内">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/webfonts/font-awesome-4.3.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+  <script src="/js/jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="container">
+    <div class="wrap">
+      <button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
+      <aside id="sidebar">
+    <div class="sidebar-wrap">
+        <button class="hide-button">
+            <i class="fa fa-angle-double-left"></i>
+        </button>
+        <button class="close-button fa fa-fw fa-close"></button>
+        <div class="logo">
+            <span>Star</span>
+            <img src="/images/logo-2.png" alt="LOGO"/>
+        </div>
+        <div class="intro">鲜花与掌声，献给时光</div>
+        <nav id="sidebar-nav">
+            
+            <a href="/"><i class="fa fa-bars"></i>Home</a>
+            
+            <a href="/archives"><i class="fa fa-bars"></i>Archives</a>
+            
+            <a href="/categories"><i class="fa fa-bars"></i>Categories</a>
+            
+            <a href="/tags"><i class="fa fa-bars"></i>Tags</a>
+            
+        </nav>
+        <div id="sidebar-bottom">
+            <ul class="social">
+                <li><a href=""><i class="fa fa-github"></i></a></li>
+                <li><a href=""><i class="fa fa-facebook"></i></a></li>
+                <li><a href=""><i class="fa fa-weibo"></i></a></li>
+                <li><a href=""><i class="fa fa-qq"></i></a></li>
+                <li><a href=""><i class="fa fa-weixin"></i></a></li>
+            </ul>
+            <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 star&nbsp;
+      - <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+        </div>
+    </div>
+</aside>
+      <section id="main" class="outer ml-has-sidebar"><article id="post-2015-07-09-you-need-know-about-z-index" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      漫谈CSS—z-index
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2015/07/09/2015-07-09-you-need-know-about-z-index/" class="article-date">
+  <time datetime="2015-07-08T16:00:00.000Z" itemprop="datePublished">2015-07-09</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/code/">code</a><span>></span><a class="article-category-link" href="/categories/code/CSS/">CSS</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在<a href="http://www.w3.org/TR/CSS21/visuren.html#z-index" target="_blank" rel="external">CSS 2.1 Section 9.9.1 - Specifying the stack level</a>标准中, 第一句话就说了,对于一个定位的box,z-index属性确定了这个元素在当前堆叠上下文中的堆叠层级同时是建立一个新的堆叠上下文。</p>
+<h2 id="u6CA1_u6709z-index_u7684_u5806_u53E0"><a href="#u6CA1_u6709z-index_u7684_u5806_u53E0" class="headerlink" title="没有z-index的堆叠"></a>没有z-index的堆叠</h2><p>如果没有元素拥有z-index元素,浏览器渲染元素的顺序是这样的:</p>
+<ol>
+<li>根元素的背景和边框</li>
+<li>正常流中的块元素</li>
+<li>浮动的块元素</li>
+<li>正常流中的内联元素</li>
+<li>定位元素</li>
+</ol>
+<p>根据1-&gt;2-&gt;3-&gt;4-&gt;5的顺序绘制, 越往前越先绘制也就在越后面。<br><img src="http://segmentfault.com/img/bVb4mg" alt="一个例子"></p>
+<h2 id="z-index_u6765_u4E86"><a href="#z-index_u6765_u4E86" class="headerlink" title="z-index来了"></a>z-index来了</h2><p>如果有了z-index, 这一属性会影响元素的渲染情况,原因是z-index属性会带来堆叠上下文(stacking context)。在一个堆叠上下文中子元素根据下述的规则进行渲染。</p>
+<p>值得注意的是子堆叠上下文只在父元素中有意义。父堆叠上下文中的一个个子堆叠上下文是原子性的,自成单元的。<br>渲染顺序:</p>
+<ol>
+<li>堆叠上下文的背景和边框</li>
+<li>负的子堆叠上下文</li>
+<li>流内非内联,非定位的子孙元素(normal 流中的块元素)</li>
+<li>非定位的浮动</li>
+<li>子堆叠上下文中z-index为0的和定位的z-index为0的元素</li>
+<li>正的子堆叠上下文</li>
+</ol>
+<h2 id="u600E_u4E48_u6837_u4F1A_u4EA7_u751F_u5806_u53E0_u4E0A_u4E0B_u6587"><a href="#u600E_u4E48_u6837_u4F1A_u4EA7_u751F_u5806_u53E0_u4E0A_u4E0B_u6587" class="headerlink" title="怎么样会产生堆叠上下文"></a>怎么样会产生堆叠上下文</h2><p>一开始就说到的定位元素设置一个z-index(z-index=0也会产生堆叠上下文,与定位元素z-index设置为auto都是第5级)就会产生一个堆叠上下文。</p>
+<p>产生堆叠上下文的方式:</p>
+<ol>
+<li>根元素</li>
+<li>z-index不为0的定位元素</li>
+<li>opacity小于1的元素</li>
+<li>transform不为none的元素</li>
+<li>mix-blend-mode 不是normal的元素</li>
+<li>filter不是none的元素</li>
+<li>isolation设置为isolate的元素</li>
+<li>position fixed有可能自带这一特性</li>
+<li>在will-change中设置上述任意属性</li>
+<li>-webkit-overflow-scrolling设置为touch的元素</li>
+</ol>
+<h2 id="u8DE8_u8FC7_u8FD9_u4E9B_u5751"><a href="#u8DE8_u8FC7_u8FD9_u4E9B_u5751" class="headerlink" title="跨过这些坑"></a>跨过这些坑</h2><p>一般情况下不会遇到z-index的问题, 在拖拽以及元素动画的时候要注意。是不是由于堆叠上下文,让元素层次不对,出现了显示bug。</p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/z-index/">z-index</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/08/05/2015-08-05-overflow-and-absolute/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          漫谈CSS—overflow和absolute
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/04/2015-07-04-Something-about-CSS/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">漫谈CSS—BOX&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-2015-07-09-you-need-know-about-z-index" data-title="漫谈CSS—z-index" data-url="http://yoursite.com/2015/07/09/2015-07-09-you-need-know-about-z-index/">
+
+    </div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:'starow'};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</section>
+</section>
+    </div>
+    
+
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>

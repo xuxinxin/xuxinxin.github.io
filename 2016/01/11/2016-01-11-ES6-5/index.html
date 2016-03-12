@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ES6 中的迭代器 - 徐鑫鑫的BLOG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="迭代器E6引入了迭代器的一些标准接口。迭代器是组织有序的代码的一种方式，可以理解成一次做一件事。
+接口接口中必须要有:
+12Iterator [required]    next() &amp;#123;method&amp;#125;: retrieves next IteratorResult
+另外，有两个可选的成员：
+123Iterator [optional]    return() &amp;#123;meth">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6 中的迭代器">
+<meta property="og:url" content="http://yoursite.com/2016/01/11/2016-01-11-ES6-5/index.html">
+<meta property="og:site_name" content="徐鑫鑫的BLOG">
+<meta property="og:description" content="迭代器E6引入了迭代器的一些标准接口。迭代器是组织有序的代码的一种方式，可以理解成一次做一件事。
+接口接口中必须要有:
+12Iterator [required]    next() &amp;#123;method&amp;#125;: retrieves next IteratorResult
+另外，有两个可选的成员：
+123Iterator [optional]    return() &amp;#123;meth">
+<meta property="og:updated_time" content="2016-01-11T13:44:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6 中的迭代器">
+<meta name="twitter:description" content="迭代器E6引入了迭代器的一些标准接口。迭代器是组织有序的代码的一种方式，可以理解成一次做一件事。
+接口接口中必须要有:
+12Iterator [required]    next() &amp;#123;method&amp;#125;: retrieves next IteratorResult
+另外，有两个可选的成员：
+123Iterator [optional]    return() &amp;#123;meth">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/webfonts/font-awesome-4.3.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+  <script src="/js/jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="container">
+    <div class="wrap">
+      <button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
+      <aside id="sidebar">
+    <div class="sidebar-wrap">
+        <button class="hide-button">
+            <i class="fa fa-angle-double-left"></i>
+        </button>
+        <button class="close-button fa fa-fw fa-close"></button>
+        <div class="logo">
+            <span>Star</span>
+            <img src="/images/logo-2.png" alt="LOGO"/>
+        </div>
+        <div class="intro">鲜花与掌声，献给时光</div>
+        <nav id="sidebar-nav">
+            
+            <a href="/"><i class="fa fa-bars"></i>Home</a>
+            
+            <a href="/archives"><i class="fa fa-bars"></i>Archives</a>
+            
+            <a href="/categories"><i class="fa fa-bars"></i>Categories</a>
+            
+            <a href="/tags"><i class="fa fa-bars"></i>Tags</a>
+            
+        </nav>
+        <div id="sidebar-bottom">
+            <ul class="social">
+                <li><a href=""><i class="fa fa-github"></i></a></li>
+                <li><a href=""><i class="fa fa-facebook"></i></a></li>
+                <li><a href=""><i class="fa fa-weibo"></i></a></li>
+                <li><a href=""><i class="fa fa-qq"></i></a></li>
+                <li><a href=""><i class="fa fa-weixin"></i></a></li>
+            </ul>
+            <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 star&nbsp;
+      - <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+        </div>
+    </div>
+</aside>
+      <section id="main" class="outer ml-has-sidebar"><article id="post-2016-01-11-ES6-5" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ES6 中的迭代器
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/01/11/2016-01-11-ES6-5/" class="article-date">
+  <time datetime="2016-01-10T16:00:00.000Z" itemprop="datePublished">2016-01-11</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/code/">code</a><span>></span><a class="article-category-link" href="/categories/code/ES6/">ES6</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="u8FED_u4EE3_u5668"><a href="#u8FED_u4EE3_u5668" class="headerlink" title="迭代器"></a>迭代器</h1><p>E6引入了迭代器的一些标准接口。迭代器是组织有序的代码的一种方式，可以理解成一次做一件事。</p>
+<h2 id="u63A5_u53E3"><a href="#u63A5_u53E3" class="headerlink" title="接口"></a>接口</h2><p>接口中必须要有:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Iterator [required]</span><br><span class="line">    next() &#123;method&#125;: retrieves next IteratorResult</span><br></pre></td></tr></table></figure>
+<p>另外，有两个可选的成员：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Iterator [optional]</span><br><span class="line">    <span class="keyword">return</span>() &#123;method&#125;: stops iterator and returns IteratorResult</span><br><span class="line">    <span class="keyword">throw</span>() &#123;method&#125;: signals error and returns IteratorResult</span><br></pre></td></tr></table></figure>
+<p>还有迭代的结果:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">IteratorResult</span><br><span class="line">    value &#123;property&#125;: current iteration value or final <span class="keyword">return</span> value</span><br><span class="line">        (optional <span class="keyword">if</span> <span class="string">`undefined`</span>)</span><br><span class="line">    done &#123;property&#125;: boolean, indicates completion status</span><br></pre></td></tr></table></figure>
+<p>在当前的JS中并不支持接口的语法，所以你需要在你自己的代码中维护这些接口。当JS希望得到一个迭代器的时候(例如 <code>for..of..</code> 循环)，你必须实现了这些接口，否则代码会运行失败。</p>
+<p>还有一个 <code>Iterable</code> 接口， 表示对象必须能够返回一个迭代器：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Iterable</span><br><span class="line">    @@iterator() &#123;method&#125;: produces an Iterator</span><br></pre></td></tr></table></figure>
+<p><code>@@iterator</code> 是一个内建的 symbol, 代表方法必须能够生产一个迭代器。</p>
+<h2 id="IteratorResult"><a href="#IteratorResult" class="headerlink" title="IteratorResult"></a>IteratorResult</h2><p>迭代器返回的结果 <code>IteratorResult</code> 是对象的形式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; value: .. , done: <span class="literal">true</span> / <span class="literal">false</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>内置的迭代器返回值都是这个形式，当然，对象中也可以添加别的属性。</p>
+<h2 id="next_28_29__u8FED_u4EE3"><a href="#next_28_29__u8FED_u4EE3" class="headerlink" title="<code>next()</code> 迭代"></a><code>next()</code> 迭代</h2><p>一个可迭代的数组，使用迭代器能够遍历整个数组：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> it = arr[<span class="built_in">Symbol</span>.iterator]();</span><br><span class="line"></span><br><span class="line">it.next();      <span class="comment">// &#123; value: 1, done: false &#125;</span></span><br><span class="line">it.next();      <span class="comment">// &#123; value: 2, done: false &#125;</span></span><br><span class="line">it.next();      <span class="comment">// &#123; value: 3, done: false &#125;</span></span><br><span class="line"></span><br><span class="line">it.next();      <span class="comment">// &#123; value: undefined, done: true &#125;</span></span><br></pre></td></tr></table></figure>
+<p><code>arr</code> 的 <code>System.iterator</code> 方法会返回一个迭代器，大多数的数据结构都是这样的。</p>
+<p>从上面这段代码可以看到 <code>it</code> 迭代器直到你接收到 3 之后才把 <code>done</code> 设成 <code>true</code> , 这个时候已经遍历完整个数组了。</p>
+<p>字符串字面量默认也是可迭代的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> greeting = <span class="string">"hello world"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> it = greeting[<span class="built_in">Symbol</span>.iterator]();</span><br><span class="line"></span><br><span class="line">it.next();      <span class="comment">// &#123; value: "h", done: false &#125;</span></span><br><span class="line">it.next();      <span class="comment">// &#123; value: "e", done: false &#125;</span></span><br></pre></td></tr></table></figure>
+<p>ES6 引入了一些新的数据结构–集合。这些数据结构不仅可迭代，而且提供返回迭代器的API：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> m = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">m.set( <span class="string">"foo"</span>, <span class="number">42</span> );</span><br><span class="line">m.set( &#123; cool: <span class="literal">true</span> &#125;, <span class="string">"hello world"</span> );</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> it1 = m[<span class="built_in">Symbol</span>.iterator]();</span><br><span class="line"><span class="keyword">var</span> it2 = m.entries();</span><br><span class="line"></span><br><span class="line">it1.next();     <span class="comment">// &#123; value: [ "foo", 42 ], done: false &#125;</span></span><br><span class="line">it2.next();     <span class="comment">// &#123; value: [ "foo", 42 ], done: false &#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Optional_3A_return_28-_29_and_throw_28-_29"><a href="#Optional_3A_return_28-_29_and_throw_28-_29" class="headerlink" title="Optional: <code>return(..)</code> and <code>throw(..)</code>"></a>Optional: <code>return(..)</code> and <code>throw(..)</code></h2><p><code>return(..)</code> 会发送一个信号给迭代器，告诉迭代器不要再继续了，可以停止工作了，然后开始一些清理工作，例如（释放网络连接等等）。</p>
+<p>如果一个迭代器有 <code>return</code> 方法，那么在不正常或者提前终止迭代的时候，迭代器会自动调用这个方法。你也可以手动调用这个方法。</p>
+<p>当异常或者错误发生的时候，迭代器会调用 <code>throw()</code>。</p>
+<p>下面看一个自定义的迭代器的例子:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Fib = &#123;</span><br><span class="line">    [<span class="built_in">Symbol</span>.iterator]() &#123;</span><br><span class="line">        <span class="keyword">var</span> n1 = <span class="number">1</span>, n2 = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="comment">// make the iterator an iterable</span></span><br><span class="line">            [<span class="built_in">Symbol</span>.iterator]() &#123; <span class="keyword">return</span> <span class="keyword">this</span>; &#125;,</span><br><span class="line"></span><br><span class="line">            next() &#123;</span><br><span class="line">                <span class="keyword">var</span> current = n2;</span><br><span class="line">                n2 = n1;</span><br><span class="line">                n1 = n1 + current;</span><br><span class="line">                <span class="keyword">return</span> &#123; value: current, done: <span class="literal">false</span> &#125;;</span><br><span class="line">            &#125;,</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span>(v) &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(</span><br><span class="line">                    <span class="string">"Fibonacci sequence abandoned."</span></span><br><span class="line">                );</span><br><span class="line">                <span class="keyword">return</span> &#123; value: v, done: <span class="literal">true</span> &#125;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> v <span class="keyword">of</span> Fib) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log( v );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (v &gt; <span class="number">50</span>) <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 1 1 2 3 5 8 13 21 34 55</span></span><br><span class="line"><span class="comment">// Fibonacci sequence abandoned.</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Iterator/">Iterator</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/14/2016-01-12-ES6-6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          ES6 中的生成器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/10/2016-01-10-ES6-4/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ES6中的箭头函数&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-2016-01-11-ES6-5" data-title="ES6 中的迭代器" data-url="http://yoursite.com/2016/01/11/2016-01-11-ES6-5/">
+
+    </div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:'starow'};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</section>
+</section>
+    </div>
+    
+
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>

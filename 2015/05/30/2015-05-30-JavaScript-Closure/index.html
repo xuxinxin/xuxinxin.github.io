@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaScript 闭包 - 徐鑫鑫的BLOG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="什么是闭包？通俗的说法是对象是变量带着函数，而闭包是函数带着变量。但是在理解闭包之前估计也是很难理解这通俗的说法。还有一种观点说是 Javascript种所有发函数都是闭包。 不去探讨这个观点的正确与否，从这两者的说法中我们可以看到闭包一定是与函数有关，在Javascript中函数就是一块作用域，也就是说闭包是与作用域有关的。
+在Javascript中，函数是一种特殊的对象，他能在其他函数里面声明">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 闭包">
+<meta property="og:url" content="http://yoursite.com/2015/05/30/2015-05-30-JavaScript-Closure/index.html">
+<meta property="og:site_name" content="徐鑫鑫的BLOG">
+<meta property="og:description" content="什么是闭包？通俗的说法是对象是变量带着函数，而闭包是函数带着变量。但是在理解闭包之前估计也是很难理解这通俗的说法。还有一种观点说是 Javascript种所有发函数都是闭包。 不去探讨这个观点的正确与否，从这两者的说法中我们可以看到闭包一定是与函数有关，在Javascript中函数就是一块作用域，也就是说闭包是与作用域有关的。
+在Javascript中，函数是一种特殊的对象，他能在其他函数里面声明">
+<meta property="og:updated_time" content="2016-01-07T07:43:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript 闭包">
+<meta name="twitter:description" content="什么是闭包？通俗的说法是对象是变量带着函数，而闭包是函数带着变量。但是在理解闭包之前估计也是很难理解这通俗的说法。还有一种观点说是 Javascript种所有发函数都是闭包。 不去探讨这个观点的正确与否，从这两者的说法中我们可以看到闭包一定是与函数有关，在Javascript中函数就是一块作用域，也就是说闭包是与作用域有关的。
+在Javascript中，函数是一种特殊的对象，他能在其他函数里面声明">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/webfonts/font-awesome-4.3.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+  <script src="/js/jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="container">
+    <div class="wrap">
+      <button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
+      <aside id="sidebar">
+    <div class="sidebar-wrap">
+        <button class="hide-button">
+            <i class="fa fa-angle-double-left"></i>
+        </button>
+        <button class="close-button fa fa-fw fa-close"></button>
+        <div class="logo">
+            <span>Star</span>
+            <img src="/images/logo-2.png" alt="LOGO"/>
+        </div>
+        <div class="intro">鲜花与掌声，献给时光</div>
+        <nav id="sidebar-nav">
+            
+            <a href="/"><i class="fa fa-bars"></i>Home</a>
+            
+            <a href="/archives"><i class="fa fa-bars"></i>Archives</a>
+            
+            <a href="/categories"><i class="fa fa-bars"></i>Categories</a>
+            
+            <a href="/tags"><i class="fa fa-bars"></i>Tags</a>
+            
+        </nav>
+        <div id="sidebar-bottom">
+            <ul class="social">
+                <li><a href=""><i class="fa fa-github"></i></a></li>
+                <li><a href=""><i class="fa fa-facebook"></i></a></li>
+                <li><a href=""><i class="fa fa-weibo"></i></a></li>
+                <li><a href=""><i class="fa fa-qq"></i></a></li>
+                <li><a href=""><i class="fa fa-weixin"></i></a></li>
+            </ul>
+            <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 star&nbsp;
+      - <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+        </div>
+    </div>
+</aside>
+      <section id="main" class="outer ml-has-sidebar"><article id="post-2015-05-30-JavaScript-Closure" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript 闭包
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2015/05/30/2015-05-30-JavaScript-Closure/" class="article-date">
+  <time datetime="2015-05-29T16:00:00.000Z" itemprop="datePublished">2015-05-30</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/code/">code</a><span>></span><a class="article-category-link" href="/categories/code/JS/">JS</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="u4EC0_u4E48_u662F_u95ED_u5305_uFF1F"><a href="#u4EC0_u4E48_u662F_u95ED_u5305_uFF1F" class="headerlink" title="什么是闭包？"></a>什么是闭包？</h2><p>通俗的说法是<strong>对象是变量带着函数，而闭包是函数带着变量</strong>。但是在理解闭包之前估计也是很难理解这通俗的说法。还有一种观点说是 <strong>Javascript种所有发函数都是闭包。</strong> 不去探讨这个观点的正确与否，从这两者的说法中我们可以看到闭包一定是与函数有关，在Javascript中函数就是一块作用域，也就是说闭包是与作用域有关的。</p>
+<p>在Javascript中，函数是一种特殊的对象，他能在其他函数里面声明，他可以被赋值给变量，他特殊的地方是可以被调用。在C/C++中，函数必须有声明，然后可以被调用，函数调用时会切换到一个新的上下文环境中执行代码。在Javascript中不是这样的，一个函数可以不被声明立即执行，函数执行的时候也不会切换上下文环境。</p>
+<p>那么在Javascript中作用域是怎么样的呢?一个函数就类似于其他语言中的一对{}，{}里面可以访问{}外面的变量，在函数里可以访问函数外的变量。在其他语言中函数无法访问外部函数的变量，只可以访问局部变量以及全局变量。Javascript中特殊的地方是函数可以访问外部函数的变量。</p>
+<p>那么闭包是什么呢？无论用什么方法让一个内部函数(这个函数在别的函数内部)在外面执行，他会获得最原始声明处和当前执行处的作用域。</p>
+<p>所以有人说闭包是可以读取其他函数内部的变量，这里的其他函数就是这个函数原始声明处的外部函数。</p>
+<h2 id="u770B_u770B_u95ED_u5305"><a href="#u770B_u770B_u95ED_u5305" class="headerlink" title="看看闭包"></a>看看闭包</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log( a ); <span class="comment">// undefined</span></span><br><span class="line">&#125;</span><br><span class="line">f1();</span><br></pre></td></tr></table></figure>
+<p>为什么所有函数都是闭包呢？因为函数一定是声明在某一个上下文环境当中的，上面这个f1就是声明在全局环境中。f1的执行环境也是这个全局环境，和其他语言一样，函数内部访问到a并不令人感到意外，虽然结果是一致的，但是原因可能和你想象的不大一样。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a=<span class="number">2</span>;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		alert(a); <span class="comment">// 2</span></span><br><span class="line">	&#125;</span><br><span class="line">	f2();</span><br><span class="line">&#125;</span><br><span class="line">f1();</span><br></pre></td></tr></table></figure>
+<p>虽然可能与其他语言中有一些不一样，但是这并不意外嘛！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a=<span class="number">2</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		alert(a); <span class="comment">// 2</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">f2 = f1();</span><br><span class="line">f2();</span><br></pre></td></tr></table></figure>
+<p>这个看起来有点意外，f1执行完之后返回了一个函数之后没有被释放吗？为什么f2执行的时候不会报错？这个就是闭包。无论它在哪里执行，它具有声明和执行时候的作用域。f2虽然在全局环境中执行，但是声明是在f1内部，所以f2之后执行的时候依然能够访问到f1内部变量<code>a</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(a);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">3</span>;</span><br><span class="line">	f2();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">f1();</span><br></pre></td></tr></table></figure>
+<p>这个结果是多少呢？f2在全局环境中声明, 在f1内部执行。也就说说f2执行的时候f2具有全局作用域和f1作用域。那么哪个作用域优先呢？试一试！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(a);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	a = <span class="number">3</span>;</span><br><span class="line">	f2();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">f1();</span><br></pre></td></tr></table></figure>
+<p>那么这一段代码运行的结果是多少呢？为什么呢？理解了吗？</p>
+<h2 id="u95ED_u5305_u7684_u4F5C_u7528"><a href="#u95ED_u5305_u7684_u4F5C_u7528" class="headerlink" title="闭包的作用"></a>闭包的作用</h2><p>首先是变量的封装隐藏。你看上面的例子，一个外部函数的返回值是一个函数。这个函数可以访问外部函数的变量，而没有其他办法可以访问这个外部函数的变量，实现了人为的封装,private性。</p>
+<p>第二个作用是实现类似static count的效果，在内存中一直维持着这个变量。</p>
+<p>缺点就是闭包锁住了这个环境，查找作用域的时候会带来额外的开销，并且内存的开销也会变大。</p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/闭包/">闭包</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/06/01/2015-06-01-About-This/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          JavaScript中的This
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/05/16/2015-05-16-JavaScript-Scope/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaScript作用域&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-2015-05-30-JavaScript-Closure" data-title="JavaScript 闭包" data-url="http://yoursite.com/2015/05/30/2015-05-30-JavaScript-Closure/">
+
+    </div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:'starow'};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</section>
+</section>
+    </div>
+    
+
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Box position in CSS - 徐鑫鑫的BLOG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文的知识主要来源于 learn CSS Layout, 本篇文章是对书中第一章相关内容的梳理，总结。
+一个元素的横竖位置由定位方式(positioning scheme)所决定，而定位方式主要由三个属性display, float, position影响。display属性的默认值是block或者inline，这个属性决定了布局时候使用的算法。position属性的默认值是static，这个属性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Box position in CSS">
+<meta property="og:url" content="http://yoursite.com/2015/09/06/2015-09-05-box-position-in-CSS/index.html">
+<meta property="og:site_name" content="徐鑫鑫的BLOG">
+<meta property="og:description" content="本文的知识主要来源于 learn CSS Layout, 本篇文章是对书中第一章相关内容的梳理，总结。
+一个元素的横竖位置由定位方式(positioning scheme)所决定，而定位方式主要由三个属性display, float, position影响。display属性的默认值是block或者inline，这个属性决定了布局时候使用的算法。position属性的默认值是static，这个属性">
+<meta property="og:updated_time" content="2016-01-07T10:55:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Box position in CSS">
+<meta name="twitter:description" content="本文的知识主要来源于 learn CSS Layout, 本篇文章是对书中第一章相关内容的梳理，总结。
+一个元素的横竖位置由定位方式(positioning scheme)所决定，而定位方式主要由三个属性display, float, position影响。display属性的默认值是block或者inline，这个属性决定了布局时候使用的算法。position属性的默认值是static，这个属性">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/webfonts/font-awesome-4.3.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+  <script src="/js/jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="container">
+    <div class="wrap">
+      <button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
+      <aside id="sidebar">
+    <div class="sidebar-wrap">
+        <button class="hide-button">
+            <i class="fa fa-angle-double-left"></i>
+        </button>
+        <button class="close-button fa fa-fw fa-close"></button>
+        <div class="logo">
+            <span>Star</span>
+            <img src="/images/logo-2.png" alt="LOGO"/>
+        </div>
+        <div class="intro">鲜花与掌声，献给时光</div>
+        <nav id="sidebar-nav">
+            
+            <a href="/"><i class="fa fa-bars"></i>Home</a>
+            
+            <a href="/archives"><i class="fa fa-bars"></i>Archives</a>
+            
+            <a href="/categories"><i class="fa fa-bars"></i>Categories</a>
+            
+            <a href="/tags"><i class="fa fa-bars"></i>Tags</a>
+            
+        </nav>
+        <div id="sidebar-bottom">
+            <ul class="social">
+                <li><a href=""><i class="fa fa-github"></i></a></li>
+                <li><a href=""><i class="fa fa-facebook"></i></a></li>
+                <li><a href=""><i class="fa fa-weibo"></i></a></li>
+                <li><a href=""><i class="fa fa-qq"></i></a></li>
+                <li><a href=""><i class="fa fa-weixin"></i></a></li>
+            </ul>
+            <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 star&nbsp;
+      - <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+        </div>
+    </div>
+</aside>
+      <section id="main" class="outer ml-has-sidebar"><article id="post-2015-09-05-box-position-in-CSS" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Box position in CSS
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2015/09/06/2015-09-05-box-position-in-CSS/" class="article-date">
+  <time datetime="2015-09-05T16:00:00.000Z" itemprop="datePublished">2015-09-06</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/code/">code</a><span>></span><a class="article-category-link" href="/categories/code/CSS/">CSS</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文的知识主要来源于 <a href="http://book.mixu.net/css/1-positioning.html" target="_blank" rel="external">learn CSS Layout</a>, 本篇文章是对书中第一章相关内容的梳理，总结。</p>
+<p>一个元素的横竖位置由定位方式(positioning scheme)所决定，而定位方式主要由三个属性display, float, position影响。display属性的默认值是block或者inline，这个属性决定了布局时候使用的算法。position属性的默认值是static，这个属性决定了控制元素定位的方式。float属性的默认值是none,这个属性允许其他元素浮动在这个元素的周围。</p>
+<p>理解 float 和 absolute positioning 的原理，可以通过它们与 normal flow 的相互影响来理解。所以我们从 normal flow 开始剖析。</p>
+<p>理解定位，布局主要考虑的是以下两点</p>
+<ul>
+<li>这个元素的大小(高度和宽度),这个元素的水平校准方式和垂直校准(align)方式</li>
+<li>同一个父元素的元素们相互之间相对摆放的位置。<br>换而言之，如果每个元素的上面两点给定了，是否整个布局就确定了呢？</li>
+</ul>
+<p>同一个父元素的元素之间相对摆放位置是由这个父元素为子元素建立的格式上下文(format context)决定的。<br>normal flow中的盒子属于一个块或者行内的格式上下文，块级盒子加入块级格式上下文，行内盒子加入行内格式上下文。</p>
+<p>父元素在建立格式上下文时考虑子元素是块级的或者是行内级的。</p>
+<p>块级元素的含义: 每一个块级元素会生成一个块级盒子用来包裹子孙元素，同时也是这个盒子参与定位计划。每一个块级盒子都是一个块级包含盒，可以包含其他的盒子而且有一个特定的格式上下文。</p>
+<p>行内元素的含义: 行内元素不产生新的块，并且内容可以分开成多行。</p>
+<p>两种格式上下文(BFC,inline format context)可以被简单的认为是水平堆叠区，或者是垂直堆叠区。这一点在后面解释，先注意另外一点。</p>
+<p>所有盒子要么是块格式上下文，要么是行内格式上下文，也就是一个父元素的所有子元素布局的时候只有一种格式上下文。那当行内元素和块元素混合的时候怎么处理呢？<br>会产生一种叫匿名盒的东西，这个匿名盒参与父元素的格式上下文的组成，自己本身为子元素提供了一个格式上下文。它本身不存在，存在的是它的子元素以及它的父元素。</p>
+<h2 id="u533F_u540D_u76D2"><a href="#u533F_u540D_u76D2" class="headerlink" title="匿名盒"></a>匿名盒</h2><p>匿名盒的诞生是为了解决 块元素和行内元素混合，以及有一些不被标签包含的文字所带来的格式上下文 的问题。</p>
+<p>匿名盒的介绍不过多叙述可以参考<a href="http://book.mixu.net/css/1-positioning.html#anonymous-block-boxes" target="_blank" rel="external">Anonymous block boxes</a>.</p>
+<p>有几个比较重要的规则：</p>
+<ol>
+<li>如果一个块级包含盒有一个块级盒子在里面，那么强迫它的所有子元素都是块级盒子(通过产生匿名盒)</li>
+<li>如果一个行内盒子包含一个块级盒子，那么这个行内盒子在块级盒子的地方折断，分成两个部分，每个部分变成块级的盒子。<br>简单的理解就是块级盒子和行内盒子混合的时候，行内盒子会被匿名块盒包裹起来，变身成为块级盒子。</li>
+</ol>
+<h2 id="normal_flow_3A_block_formatting"><a href="#normal_flow_3A_block_formatting" class="headerlink" title="normal flow: block formatting"></a>normal flow: block formatting</h2><p>对于块级格式上下文，所有盒子都是纵向的一个一个排列，即使宽度不足以充满父元素的宽度。每一个盒子的左边界靠着父元素的左边界。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.float</span></span><br><span class="line">  <span class="tag">float</span>: <span class="tag">left</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class">.foo</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">padding-top</span>:<span class="value"> <span class="number">10px</span></span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="class">.bar</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">30%</span></span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="class">.baz</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">40%</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"container violet"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"float red"</span>&gt;</span>float<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"foo blue"</span>&gt;</span>foo<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"bar green"</span>&gt;</span>bar<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"baz orange"</span>&gt;</span>baz<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>懒得画例子，同时也就省了说明， copy一下</p>
+<ul>
+<li>every block box is on the left outer edge of the containing block</li>
+<li>the presence of a float does not influence the position of the left outer edge (per spec) in any way, except to offset the text</li>
+<li>the block box foo (which has no width set) expands to the full container width</li>
+<li>the two other boxes, which have set widths extend from the left edge of the container</li>
+<li>the two other boxes are not moved around in any way, even though they would for example fit on a single row</li>
+</ul>
+<p>总结一下，如果某个父元素有一个子元素是块级的，那么这个父元素为它的直系后代生成的生活环境(格式上下文)就是块级的，那么不是块级的元素呢一个个假装自己是块级的(通过匿名盒)，然后父亲看着他们一个一个纵向排列，觉得非常满意。块级的元素非常厉害，独占一行，并且能为后代创建一个生活环境。</p>
+<h2 id="Normal_flow_3A_inline_formatting"><a href="#Normal_flow_3A_inline_formatting" class="headerlink" title="Normal flow: inline formatting"></a>Normal flow: inline formatting</h2><p>行内格式上下文比较麻烦，因为行内元素是会分成多行的，也就是说行内格式上下文会分成多个line boxes，这个东西在html中是不体现出来，但是内在布局中又有很大的影响。</p>
+<p>line boxes也可以理解成一个匿名的盒子，它是独占一行，并且往往宽度就是整行的宽度，高度由这一行包含的所有盒子决定。</p>
+<p>当一个行内元素的宽度超过它的包含块的宽度，它就会断成多行生成line box，如果是一个替换元素不能断则纵向溢出这个line box。</p>
+<p>介绍控制对齐发式的两个属性: text-align和vertical-align。</p>
+<p>text-align用于包含块，决定包含块内的行内元素的水平对齐方式，有left,right, center justify等等属性。</p>
+<p>先说说行内元素的另外一个问题: 两个行内元素,在HTMl的标签中如果中间有换行或者空格，那么显示的效果是这两个元素是有间隙的，不像块元素从上往下，元素是没有间隙。</p>
+<p>解决这个问题的办法有</p>
+<ol>
+<li><p>将标签写在一起例如</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span><span class="tag">&lt;<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这样。</p>
+</li>
+<li>设置font-size为0，然后额外为每一个元素设置他们所需要的font-size。</li>
+<li>设置white-space:nowrap,这一属性不能避免间隙但是能让元素不换行，右边的元素会overflow。</li>
+<li>使用CSS3的text-space-collapse属性。使用之前请确认浏览器的支持性</li>
+</ol>
+<h3 id="vertical-align"><a href="#vertical-align" class="headerlink" title="vertical-align"></a>vertical-align</h3><p>vertical-align比text-align要更难理解，当然也更难使用。这一属性控制盒子的垂直对齐方式，只对行内盒子有效。在word中有上标，下标，这一属性就是控制这个东西的。</p>
+<p>不难想到对于垂直对齐来说，高度是很重要的。行内元素的高度，设计到纵向的padding，margin是不能影响到高度的。对了这里说的高度是什么高度呢。</p>
+<p>如果是包含块的高度那不是设置一下包含块的height不就完事了嘛？这里说的是line box的高度。这个高度由line-height属性决定。</p>
+<p>相信大家都使用过height和line-height设置成一样使得文字垂直居中的方案。</p>
+<p>line-height在没有设定值的时候是和字体高度有关，与父元素的高度没有任何的关系。line-height的取值有多种，可以参考<a href="http://www.zhangxinxu.com/wordpress/2009/11/css%E8%A1%8C%E9%AB%98line-height%E7%9A%84%E4%B8%80%E4%BA%9B%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%8F%8A%E5%BA%94%E7%94%A8/" target="_blank" rel="external">css行高line-height的一些深入理解及应用</a><br>当然去阅读本文参考的那篇英文文献是最好的选择，张鑫旭的文章往往不解释本质的原理，更多的是引导你去理解这个问题。</p>
+<p>了解了行高之后，接下来理解vertical-align的值:</p>
+<p>baseline:  将盒子的基线与父盒子的基线对齐，如果盒子没有基线，将bottom margin edge与父盒子的基线对齐</p>
+<p>middle:    将盒子的中点 与父盒子基线加上父元素x字母高度一般的位置对齐</p>
+<p>sub:       下标对齐</p>
+<p>super:     上标对齐</p>
+<p>text-top:  盒子的顶部与父内容区域的顶部对齐</p>
+<p>text-bottom: 盒子的底部与父内容区域的底部对齐</p>
+<p>百分比:     升高或下降行高乘以百分比距离</p>
+<p>长度：      升高或下降这一长度</p>
+<p>top和bottom与以上不一样，这两个值是与line box的top或者bottom对齐。</p>
+<p>注意，一个行内盒子(inline box)包含:</p>
+<ul>
+<li>font-size,决定文字区域的大小</li>
+<li>line-height, 决定inline box的高度</li>
+<li>一个baseline, 由font决定的位置</li>
+</ul>
+<p>line box(不是inline box),高度由每一个它所包含的inline box的高度计算，然后应用vertical-align来对行内的元素们进行对齐。</p>
+<p>每一个line box包含:</p>
+<ul>
+<li><p>font-size,从父元素继承而来</p>
+</li>
+<li><p>由行内盒子的高度和对齐方式确定的高度</p>
+</li>
+<li><p>一条有“strut”定义的基线</p>
+</li>
+</ul>
+<h2 id="Normal_flow_3A_relative_positioning"><a href="#Normal_flow_3A_relative_positioning" class="headerlink" title="Normal flow: relative positioning"></a>Normal flow: relative positioning</h2><p>这一元素在某些情况下非常有用，你希望整个布局不被破坏(relative的元素在normal flow中的位置不会改变)，但是希望这个元素的位置能够发生移动。</p>
+<p>也就是你希望它默默变化，不对你的布局产生破坏的情况下可以使用这一属性进行定位。方便好用无害。</p>
+<h2 id="Float_positioning_scheme"><a href="#Float_positioning_scheme" class="headerlink" title="Float positioning scheme"></a>Float positioning scheme</h2><p>关于浮动，老生常谈的话题就是清除浮动，在谈这个话题之前，我们先看一个例子(到codepen跑一下)</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.blue</span><span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="number">3px</span> solid blue</span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="class">.red</span><span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="number">3px</span> solid red</span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="class">.green</span><span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="number">3px</span> solid green</span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="class">.orange</span><span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="number">3px</span> solid orange</span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="class">.float</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">float</span>:<span class="value"> left</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">500px</span></span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="class">.para</span> <span class="rules">&#123;</span><br><span class="line"><span class="rule"><span class="attribute">margin</span>:<span class="value"><span class="number">0</span></span><br><span class="line"></span></span></span>&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">￼  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"para blue"</span>&gt;</span>Text inside a block-level box placed on a line</span><br><span class="line">  box before the float<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"para green"</span>&gt;</span>Text before the float. <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"float</span><br><span class="line">  red"</span>&gt;</span>The float<span class="tag">&lt;/<span class="title">div</span>&gt;</span> Text after the float.<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"para orange"</span>&gt;</span>Text inside a block-level box placed on a line</span><br><span class="line">  box after the float<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在这个例子中我们可以看到，The float浮动了，剩下的那些字浮动到了这个元素的周围，但是他们的border还是在原来的位置，没有发生变化。</p>
+<p>float是影响line box的宽度，使得line box变窄了，但是实际的box没有发生变化。</p>
+<p>记住: 同一格式上下文中建立新的块格式上下文的元素不能与浮动元素的margin box重叠。建立新的块格式的上下文方法就是设置overflow属性不为visible。</p>
+<p>如果有必要甚至会在这个元素身上清除浮动迫使它跑到float元素的下方。更多的情况下是有足够的空间让元素调整宽度。可以试试在上例中为orange类添加overflow:auto。然后再增加width:100%属性。</p>
+<h2 id="Float_clearing"><a href="#Float_clearing" class="headerlink" title="Float clearing"></a>Float clearing</h2><p>接下来我们谈谈清除浮动。我们可以使用clear属性来清除浮动。</p>
+<p>那么这个属性是什么意思呢。clear有4个取值，left, right, none, both。left:清除左浮动,拥有这一属性的元素它的上border必须位于拥有float：left属性的元素的下border的下面。</p>
+<p>同理right:清除右浮动，拥有这一属性的元素它的上border必须位于float: right属性元素的下border的下面。both,就是两个浮动都清除。</p>
+<p>利用这个原理清除浮动一般使用一个伪元素</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.clearfix-pseudo</span><span class="pseudo">:after</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">""</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> table</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">clear</span>:<span class="value"> both</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>可以这样去理解after,在元素的闭合标签前面加一个div元素，这个div元素就是这个after伪元素。</p>
+<p>float元素从正常流中被移除，所以父元素计算高度的时候并不包含float元素的高度。想象一张情况，我们放一张图片，然后希望有好几段文字(多个p元素)能浮动在这个图片中间。</p>
+<p>我们可以在这多个p元素中间一个放一个图片，然后图片浮动，如果父元素计算高度的时候包含这个图片，我们就不能实现文字环绕这个图片的效果了。</p>
+<p>这也是float属性的初衷。</p>
+<p>这带来的问题就是拥有float元素的父元素的高度坍塌，尤其是文字高度不够的情况下，父元素有border，浮动元素就溢出(overflow)了。</p>
+<p>这样在大多数情况下都是不合理的。标准也意识到了这种不合理，他们制定了一个新的规则。</p>
+<p>当建立新的BFC(block formatting context)的时候要将float元素的高度考虑进去。建立新的BFC是，设置float属性，设置overflow属性，设置display:block属性。</p>
+<p>将float元素重新纳入监管体系。</p>
+<p>所以也就有了使用这种方式来清除浮动，设置float属性和display属性副作用很大，设置overflow属性副作用也不小，所以考虑使用这种方式清除浮动，要三思。</p>
+<h2 id="Absolute_/_fixed_positioning_scheme"><a href="#Absolute_/_fixed_positioning_scheme" class="headerlink" title="Absolute / fixed positioning scheme"></a>Absolute / fixed positioning scheme</h2><p>这个没什么好多说的，当你定位遇到了困难，ok，绝对定位帮你解决各种不服。 理论上说，所有布局你都可以用absolute的方式去做，就是比较麻烦。可维护性和可读性也不强。但是在局部解决居中，解决特殊需求的时候，绝对定位是你的利器。</p>
+<p>(wan)</p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BOX/">BOX</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/specification/">specification</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/09/2016-01-09-ES6-1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          ES6中的块作用域
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/08/10/2015-08-09-promise-in-JS/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">遇见Promise&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-2015-09-05-box-position-in-CSS" data-title="Box position in CSS" data-url="http://yoursite.com/2015/09/06/2015-09-05-box-position-in-CSS/">
+
+    </div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:'starow'};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</section>
+</section>
+    </div>
+    
+
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>

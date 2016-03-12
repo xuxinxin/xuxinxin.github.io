@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>模板字符串替换 - 徐鑫鑫的BLOG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这是 vue 代码阅读笔记的第一篇，希望从今天开始能够通读 vue 的源码，从大神的代码中学习代码风格，以及编程技巧，提高自己的编码能力。
+概述今天分析的是 vue 的第二个commit，提交于2013年7月29号。这部分代码的功能是实现模板字符串的替换。
+假设我们有这样的一个DOM解构
+1234567&amp;lt;div id=&quot;test&quot;&amp;gt;	&amp;lt;p&amp;gt;&amp;#123;&amp;#123;msg&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模板字符串替换">
+<meta property="og:url" content="http://yoursite.com/2016/03/12/2016-03-12-vue-001/index.html">
+<meta property="og:site_name" content="徐鑫鑫的BLOG">
+<meta property="og:description" content="这是 vue 代码阅读笔记的第一篇，希望从今天开始能够通读 vue 的源码，从大神的代码中学习代码风格，以及编程技巧，提高自己的编码能力。
+概述今天分析的是 vue 的第二个commit，提交于2013年7月29号。这部分代码的功能是实现模板字符串的替换。
+假设我们有这样的一个DOM解构
+1234567&amp;lt;div id=&quot;test&quot;&amp;gt;	&amp;lt;p&amp;gt;&amp;#123;&amp;#123;msg&amp;#">
+<meta property="og:updated_time" content="2016-03-12T08:37:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="模板字符串替换">
+<meta name="twitter:description" content="这是 vue 代码阅读笔记的第一篇，希望从今天开始能够通读 vue 的源码，从大神的代码中学习代码风格，以及编程技巧，提高自己的编码能力。
+概述今天分析的是 vue 的第二个commit，提交于2013年7月29号。这部分代码的功能是实现模板字符串的替换。
+假设我们有这样的一个DOM解构
+1234567&amp;lt;div id=&quot;test&quot;&amp;gt;	&amp;lt;p&amp;gt;&amp;#123;&amp;#123;msg&amp;#">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/webfonts/font-awesome-4.3.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+  <script src="/js/jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="container">
+    <div class="wrap">
+      <button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
+      <aside id="sidebar">
+    <div class="sidebar-wrap">
+        <button class="hide-button">
+            <i class="fa fa-angle-double-left"></i>
+        </button>
+        <button class="close-button fa fa-fw fa-close"></button>
+        <div class="logo">
+            <span>Star</span>
+            <img src="/images/logo-2.png" alt="LOGO"/>
+        </div>
+        <div class="intro">鲜花与掌声，献给时光</div>
+        <nav id="sidebar-nav">
+            
+            <a href="/"><i class="fa fa-bars"></i>Home</a>
+            
+            <a href="/archives"><i class="fa fa-bars"></i>Archives</a>
+            
+            <a href="/categories"><i class="fa fa-bars"></i>Categories</a>
+            
+            <a href="/tags"><i class="fa fa-bars"></i>Tags</a>
+            
+        </nav>
+        <div id="sidebar-bottom">
+            <ul class="social">
+                <li><a href=""><i class="fa fa-github"></i></a></li>
+                <li><a href=""><i class="fa fa-facebook"></i></a></li>
+                <li><a href=""><i class="fa fa-weibo"></i></a></li>
+                <li><a href=""><i class="fa fa-qq"></i></a></li>
+                <li><a href=""><i class="fa fa-weixin"></i></a></li>
+            </ul>
+            <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 star&nbsp;
+      - <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+        </div>
+    </div>
+</aside>
+      <section id="main" class="outer ml-has-sidebar"><article id="post-2016-03-12-vue-001" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      模板字符串替换
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/03/12/2016-03-12-vue-001/" class="article-date">
+  <time datetime="2016-03-11T16:00:00.000Z" itemprop="datePublished">2016-03-12</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/code/">code</a><span>></span><a class="article-category-link" href="/categories/code/Vue-代码笔记/">Vue 代码笔记</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这是 <strong>vue</strong> 代码阅读笔记的第一篇，希望从今天开始能够通读 <strong>vue</strong> 的源码，从大神的代码中学习代码风格，以及编程技巧，提高自己的编码能力。</p>
+<h2 id="u6982_u8FF0"><a href="#u6982_u8FF0" class="headerlink" title="概述"></a>概述</h2><p>今天分析的是 <strong>vue</strong> 的第二个commit，提交于2013年7月29号。这部分代码的功能是实现模板字符串的替换。</p>
+<p>假设我们有这样的一个DOM解构</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"test"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">p</span>&gt;</span>&#123;&#123;msg&#125;&#125;<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">p</span>&gt;</span>&#123;&#123;msg&#125;&#125;<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">p</span>&gt;</span>&#123;&#123;msg&#125;&#125;<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">p</span>&gt;</span>&#123;&#123;what&#125;&#125;<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">p</span>&gt;</span>&#123;&#123;hey&#125;&#125;<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p> 需要将其中的占位字符串包裹的部分替换成对应变量的值。</p>
+<h2 id="u4EE3_u7801_u903B_u8F91"><a href="#u4EE3_u7801_u903B_u8F91" class="headerlink" title="代码逻辑"></a>代码逻辑</h2><p> 首先通过正则表达式将占位字符串替换成 <code>&lt;span data-element-binding=&quot;variable&quot;&gt;&lt;/span&gt;</code>。</p>
+<ul>
+<li>第一步是得到这个 <code>div</code></li>
+<li>第二布是将里面的所有占位字符串进行正则替换</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">el = <span class="built_in">document</span>.getElementById(id);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> content = el.innerHTML.replace(<span class="regexp">/\&#123;\&#123;(.*)\&#125;\&#125;/g</span>, markToken);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">markToken</span>(<span class="params">match, variable</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> mark = <span class="string">'&lt;span data-element-binding='</span>+variable+<span class="string">'&gt;&lt;/span&gt;'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">el.innerHTML = content;</span><br><span class="line"></span><br><span class="line"><span class="string">``</span><span class="string">` </span><br><span class="line"> </span><br><span class="line">经过上面这一步，DOM就会变成:</span><br><span class="line"></span><br><span class="line">`</span><span class="string">``</span>HTML</span><br><span class="line"> &lt;div id=<span class="string">"test"</span>&gt;</span><br><span class="line"> 	<span class="xml"><span class="tag">&lt;<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">span</span> <span class="attribute">data-element-binding</span>=<span class="value">"msg"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">span</span> <span class="attribute">data-element-binding</span>=<span class="value">"msg"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">span</span> <span class="attribute">data-element-binding</span>=<span class="value">"msg"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">span</span> <span class="attribute">data-element-binding</span>=<span class="value">"what"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">span</span> <span class="attribute">data-element-binding</span>=<span class="value">"hey"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p> 接下来我们要将数据绑定到对应的 <code>span</code> 上。思路就是获取对应的 <code>span</code> ，然后将值插入。</p>
+<p> 这里会用到 <code>msg</code>, <code>what</code>, <code>hey</code> 变量，所以我们要先将这些变量存起来。修改 <code>markToken</code> 函数：</p>
+<pre><code class="Javascript"><span class="keyword">var</span> bindings = {}
+<span class="function"><span class="keyword">function</span> <span class="title">markToken</span>(<span class="params">match, variable</span>) </span>{
+    bindings[variable] = {};
+    <span class="keyword">var</span> mark = <span class="string">'&lt;span data-element-binding='</span>+variable+<span class="string">'&gt;&lt;/span&gt;'</span>;
+};
+</code></pre>
+<p>有了上面的 <code>bingdings</code> 对象，我们可以遍历这个对象，进行绑定操作。</p>
+<pre><code class="Javascript">
+<span class="keyword">for</span>(<span class="keyword">var</span> variable <span class="keyword">in</span> bindings){
+    bind(variable);
+}
+</code></pre>
+<p>如何就行绑定呢？</p>
+<p>这里使用 <code>[Object.defineProperty](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty)</code> 方法，该方法允许精确添加或者修改对象的属性。</p>
+<p>可以通过设置对象属性的 <code>get</code> 和 <code>set</code>， 来控制属性在取值或者设值的时候进行所需的操作。</p>
+<ul>
+<li>第一步，首先将 ‘DOM’ 节点存起来,存到 <code>bindings[variable]</code> 当中，并且将这些节点的 data-element-binding 属性去掉</li>
+<li>第二步，新建一个对象 <code>data</code> ，将 <code>data</code> 对象的 <code>variable</code> 变量设置一个 <code>set</code> 函数。这个函数将上一步保存的DOM节点进行赋值，并且将值保存在 <code>bindings[variable].value</code> 属性中，之后可以用</li>
+<li><p>第三步， 将 <code>data</code> 对象的 <code>variable</code> 变量设置一个 <code>get</code> 函数。这个函数返回的 <code>bindings[variable].value</code> 属性。</p>
+<p>``` Javascript<br>var data = {};<br>function bind(variable){<br> bindings[varible].els = el.querySelectorAll(‘[ data-element-binding =’+variable+’]);<br> [].forEach.call(bindings[variable].els, function(e){</p>
+<pre><code>    e.removeAttribute(&quot;data-element-binding&quot;);
+});
+</code></pre><p> Object.defineProperty(data, variable, {</p>
+<pre><code>set: function(newValue){
+    [].forEach.call(bindings[variable].els, function(e){
+        bindings[variable].value = newValue;
+        e.textContent = newValue;
+    })
+},
+get : function(){
+    return bindings[variable].value;
+}
+</code></pre><p> })<br>}</p>
+</li>
+</ul>
+<p>``` </p>
+<p>最后只要对 <code>data[variable]</code> 进行赋值，就能将参数绑定。</p>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>模板替换功能的逻辑：</p>
+<ol>
+<li>对DOM节点的内容进行正则替换</li>
+<li>根据模板字符串将这些DOM节点分类存储到数组中</li>
+<li>对这些DOM节点赋值</li>
+</ol>
+<p>代码的逻辑：</p>
+<ol>
+<li>创建对象bindings, 用来存储<code>variable</code>属性所对应的DOM节点和值。</li>
+<li>创建data对象，对data对象variable属性赋值会调用set函数将bingdings对象中的variable属性中村的DOM节点赋值</li>
+<li>将需要绑定的DOM节点的innerHTML进行正则替换</li>
+<li>对bindings对象进行赋值，以及设置data对象对应属性的 set和 get函数。</li>
+<li>对data对象对应属性进行赋值。</li>
+</ol>
+<p>最后附上代码的地址<a href="https://github.com/vuejs/vue/blob/871ed9126639c9128c18bb2f19e6afd42c0c5ad9/explorations/getset.html" target="_blank" rel="external">简单的模板字符串替换</a></p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/模板字符串/">模板字符串</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/02/23/2016-02-23-HTTP2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">拥抱HTTP 2.0&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-2016-03-12-vue-001" data-title="模板字符串替换" data-url="http://yoursite.com/2016/03/12/2016-03-12-vue-001/">
+
+    </div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:'starow'};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</section>
+</section>
+    </div>
+    
+
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>

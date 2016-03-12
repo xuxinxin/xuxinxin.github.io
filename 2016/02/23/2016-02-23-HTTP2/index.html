@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>拥抱HTTP 2.0 - 徐鑫鑫的BLOG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="拥抱HTTP2.0本文译自 《Getting Ready For HTTP/2: A Guide For Web Designers And Developers》
+超文本传输协议(HTTP2.0)是一个非常成功的协议，现在推出了一个新的版本——HTTP/2。HTTP 2.0 支持所有HTTP/1.1的核心特征，并且能够更有效地利用网络资源，减少感知延迟。通俗的讲，就是更快。
+HTTP的历史HTT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="拥抱HTTP 2.0">
+<meta property="og:url" content="http://yoursite.com/2016/02/23/2016-02-23-HTTP2/index.html">
+<meta property="og:site_name" content="徐鑫鑫的BLOG">
+<meta property="og:description" content="拥抱HTTP2.0本文译自 《Getting Ready For HTTP/2: A Guide For Web Designers And Developers》
+超文本传输协议(HTTP2.0)是一个非常成功的协议，现在推出了一个新的版本——HTTP/2。HTTP 2.0 支持所有HTTP/1.1的核心特征，并且能够更有效地利用网络资源，减少感知延迟。通俗的讲，就是更快。
+HTTP的历史HTT">
+<meta property="og:updated_time" content="2016-02-23T13:52:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="拥抱HTTP 2.0">
+<meta name="twitter:description" content="拥抱HTTP2.0本文译自 《Getting Ready For HTTP/2: A Guide For Web Designers And Developers》
+超文本传输协议(HTTP2.0)是一个非常成功的协议，现在推出了一个新的版本——HTTP/2。HTTP 2.0 支持所有HTTP/1.1的核心特征，并且能够更有效地利用网络资源，减少感知延迟。通俗的讲，就是更快。
+HTTP的历史HTT">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/webfonts/font-awesome-4.3.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+  <script src="/js/jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="container">
+    <div class="wrap">
+      <button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
+      <aside id="sidebar">
+    <div class="sidebar-wrap">
+        <button class="hide-button">
+            <i class="fa fa-angle-double-left"></i>
+        </button>
+        <button class="close-button fa fa-fw fa-close"></button>
+        <div class="logo">
+            <span>Star</span>
+            <img src="/images/logo-2.png" alt="LOGO"/>
+        </div>
+        <div class="intro">鲜花与掌声，献给时光</div>
+        <nav id="sidebar-nav">
+            
+            <a href="/"><i class="fa fa-bars"></i>Home</a>
+            
+            <a href="/archives"><i class="fa fa-bars"></i>Archives</a>
+            
+            <a href="/categories"><i class="fa fa-bars"></i>Categories</a>
+            
+            <a href="/tags"><i class="fa fa-bars"></i>Tags</a>
+            
+        </nav>
+        <div id="sidebar-bottom">
+            <ul class="social">
+                <li><a href=""><i class="fa fa-github"></i></a></li>
+                <li><a href=""><i class="fa fa-facebook"></i></a></li>
+                <li><a href=""><i class="fa fa-weibo"></i></a></li>
+                <li><a href=""><i class="fa fa-qq"></i></a></li>
+                <li><a href=""><i class="fa fa-weixin"></i></a></li>
+            </ul>
+            <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 star&nbsp;
+      - <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+        </div>
+    </div>
+</aside>
+      <section id="main" class="outer ml-has-sidebar"><article id="post-2016-02-23-HTTP2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      拥抱HTTP 2.0
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/02/23/2016-02-23-HTTP2/" class="article-date">
+  <time datetime="2016-02-22T16:00:00.000Z" itemprop="datePublished">2016-02-23</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/code/">code</a><span>></span><a class="article-category-link" href="/categories/code/techniques/">techniques</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="u62E5_u62B1HTTP2-0"><a href="#u62E5_u62B1HTTP2-0" class="headerlink" title="拥抱HTTP2.0"></a>拥抱HTTP2.0</h1><p>本文译自 <a href="https://www.smashingmagazine.com/2016/02/getting-ready-for-http2/" target="_blank" rel="external">《Getting Ready For HTTP/2: A Guide For Web Designers And Developers》</a></p>
+<p>超文本传输协议(HTTP2.0)是一个非常成功的协议，现在推出了一个新的版本——HTTP/2。HTTP 2.0 支持所有HTTP/1.1的核心特征，并且能够更有效地利用网络资源，减少感知延迟。通俗的讲，就是更快。</p>
+<h2 id="HTTP_u7684_u5386_u53F2"><a href="#HTTP_u7684_u5386_u53F2" class="headerlink" title="HTTP的历史"></a>HTTP的历史</h2><p>HTTP是一个古老的协议，最初于1991年发布，现在使用的版本是于1999年发布的HTTP/1.1。目前的网络环境已经与那个时候有了巨大的改变。现在的主页平均是1.9M大，拥有超过100个资源数目。一个资源是一张图片或者JS、CSS文件。</p>
+<p>HTTP/1.1 对于资源数目较多的请求表现的不好。在2009年，2个谷歌的工程师公开了一个研究课题叫做SPDY，列解决了HTTP/1.1 中存在的一些问题：</p>
+<ul>
+<li>允许一个TCP连接处理多个请求</li>
+<li>允许浏览器决定资源的优先级，让服务器优先发送重要文件</li>
+<li>压缩和减少HTTP 头部</li>
+<li>实现服务器push, 服务器可以推送重要的资源给浏览器</li>
+</ul>
+<p>此外，SPDY需要浏览器和服务器之间进行加密连接（使用HTTPS）</p>
+<p>SPDY 没有取代HTTP，它是HTTP协议的一个隧道，修改HTTP的请求和响应。它需要浏览器和服务器同时支持。</p>
+<h2 id="HTTP/2"><a href="#HTTP/2" class="headerlink" title="HTTP/2"></a>HTTP/2</h2><p>HTTP/2 建立在SPDY成功的基础上，因此它也实现了SPDY的目标，但是不需要HTTPS连接。但是现在浏览器的厂商决定只实现HTTPPS的连接。HTTP 2.0是在2015年2月发布的，一年过去了，浏览器对HTTP 2.0 的支持十分可观。 与SPDY一样，HTTP/2也是需要服务器的支持，可以通过查询<a href="https://github.com/http2/http2-spec/wiki/Implementations" target="_blank" rel="external">HTTP wiki</a>得到服务器的支持情况。</p>
+<h2 id="u7F51_u7AD9_u4E00_u5B9A_u8981_u6709_u6240_u53D8_u5316_u5417"><a href="#u7F51_u7AD9_u4E00_u5B9A_u8981_u6709_u6240_u53D8_u5316_u5417" class="headerlink" title="网站一定要有所变化吗"></a>网站一定要有所变化吗</h2><p><strong>HTTP/2 是向后兼容的</strong>， 所以现有的网站并不需要任何改动。对用户来说，协议的变化是完全透明的。在HTTP/1.1 时代的一些最佳实践在2.0时代有可能会起到相反的作用。</p>
+<h2 id="u5982_u4F55_u62E5_u62B1_HTTP/2"><a href="#u5982_u4F55_u62E5_u62B1_HTTP/2" class="headerlink" title="如何拥抱 HTTP/2"></a>如何拥抱 HTTP/2</h2><p>接下来的篇幅讨论原先的最佳实践，采用HTTP 2.0需要改变的东西。对大部分网站来说，转变是一件漫长的事情。首先你的服务器软件得要升级，但是你托管的服务器有可能并不支持。在转向 HTTP/2 之前，你还要确认，你的访客们的浏览器是否支持HTTP/2 。</p>
+<h3 id="u9996_u5148_u8F6C_u5230_u79C1_u5BC6_u8FDE_u63A5"><a href="#u9996_u5148_u8F6C_u5230_u79C1_u5BC6_u8FDE_u63A5" class="headerlink" title="首先转到私密连接"></a>首先转到私密连接</h3><p>对于大多数网站来说，转向 HTTP/2 最困难的地方有可能不是 HTTP/2， 而是需要让网站基于安全连接HTTPS。 如果你开发一个新的站点或者将升级你的网站，你首先要转移到HTTPS。 在将来，你会发现一些强大的HTML5特性诸如地理位置，在非私密连接下无法使用。</p>
+<h3 id="u5C06_u591A_u4E2A_u56FE_u7247_u6574_u5408_u5230_u96EA_u78A7_u56FE_u4E2D"><a href="#u5C06_u591A_u4E2A_u56FE_u7247_u6574_u5408_u5230_u96EA_u78A7_u56FE_u4E2D" class="headerlink" title="将多个图片整合到雪碧图中"></a>将多个图片整合到雪碧图中</h3><p>在 HTTP/1.1 时代，传送一张大的图片会比传送许多小的图片更加有效。所以常常会把一些小的图标整合到一个雪碧图当中。</p>
+<p>这个雪碧图发传输只需要一个HTTP 请求，而不会有一系列多个请求出现。但是如果某一个网页只用到雪碧图中的某个图标，它也会将整个雪碧图下载下来。</p>
+<p>在 HTTP/2 中，多个请求不再是一件开销巨大的事情，因此，保持小图片会比整合到雪碧图中更加有效。在 HTTP/2 中，雪碧图不再是一个最佳实践。</p>
+<h3 id="u5C06_u56FE_u7247_u653E_u5728_data_URI_u4E2D"><a href="#u5C06_u56FE_u7247_u653E_u5728_data_URI_u4E2D" class="headerlink" title="将图片放在 data URI中"></a>将图片放在 data URI中</h3><p>在 HTTP/1.1 中，为了减少HTTP请求，会将图片转换成base64放入data URI中。因为请求的开销在 HTTP/2 中会急剧减少，所以这也不再是一个良好的实践。</p>
+<h3 id="u4F7F_u7528_u591A_u4E2A_u57DF_u540D_u5B58_u50A8_u5185_u5BB9"><a href="#u4F7F_u7528_u591A_u4E2A_u57DF_u540D_u5B58_u50A8_u5185_u5BB9" class="headerlink" title="使用多个域名存储内容"></a>使用多个域名存储内容</h3><p>在HTTP/1.1中每个域名的连接数目是有限制的，为了扩展并发连接的数目，会使用多个独立域名来缓存资源文件。HTTP/2移除了这个限制，你可以创建任意数目的请求。如果继续使用多个域名，反而会使性能下降。因为它会创建更多的TCP连接，并且会影响HTTP/2 对资源优先级的决策。</p>
+<p>##其他</p>
+<p>在优化网络性能中还有一些实践，将CSS拼接成一个文件，将多个JS文件拼接成一个文件，这些为了减少HTTP请求的实践，在HTTP 2.0 的时代都将被淘汰。因为更多的请求对于 HTTP 2.0 来说并不会增加多少开销。</p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Browsers/">Browsers</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Performance/">Performance</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Security/">Security</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/12/2016-03-12-vue-001/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          模板字符串替换
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/14/2016-01-12-ES6-6/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ES6 中的生成器&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-2016-02-23-HTTP2" data-title="拥抱HTTP 2.0" data-url="http://yoursite.com/2016/02/23/2016-02-23-HTTP2/">
+
+    </div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:'starow'};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</section>
+</section>
+    </div>
+    
+
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>

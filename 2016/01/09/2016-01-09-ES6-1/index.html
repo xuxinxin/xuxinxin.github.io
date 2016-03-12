@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ES6中的块作用域 - 徐鑫鑫的BLOG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="简介ES6是JavaScript语言的一次重大更新，于2015年6月正式发布。它的目标是利用Javascript可以构建复杂的应用程序。
+各大浏览器推出的最新版本已经对ES6有了更高的支持度，实际的支持情况可以查看kangax.github.io/es5-compat-table/es6/, 如果你不放心你的代码是否可以在所有的浏览器上运行，可以使用Babel转码器将ES6转为ES5的代码。
+语法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6中的块作用域">
+<meta property="og:url" content="http://yoursite.com/2016/01/09/2016-01-09-ES6-1/index.html">
+<meta property="og:site_name" content="徐鑫鑫的BLOG">
+<meta property="og:description" content="简介ES6是JavaScript语言的一次重大更新，于2015年6月正式发布。它的目标是利用Javascript可以构建复杂的应用程序。
+各大浏览器推出的最新版本已经对ES6有了更高的支持度，实际的支持情况可以查看kangax.github.io/es5-compat-table/es6/, 如果你不放心你的代码是否可以在所有的浏览器上运行，可以使用Babel转码器将ES6转为ES5的代码。
+语法">
+<meta property="og:updated_time" content="2016-01-10T06:56:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6中的块作用域">
+<meta name="twitter:description" content="简介ES6是JavaScript语言的一次重大更新，于2015年6月正式发布。它的目标是利用Javascript可以构建复杂的应用程序。
+各大浏览器推出的最新版本已经对ES6有了更高的支持度，实际的支持情况可以查看kangax.github.io/es5-compat-table/es6/, 如果你不放心你的代码是否可以在所有的浏览器上运行，可以使用Babel转码器将ES6转为ES5的代码。
+语法">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/webfonts/font-awesome-4.3.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+  <script src="/js/jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="container">
+    <div class="wrap">
+      <button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
+      <aside id="sidebar">
+    <div class="sidebar-wrap">
+        <button class="hide-button">
+            <i class="fa fa-angle-double-left"></i>
+        </button>
+        <button class="close-button fa fa-fw fa-close"></button>
+        <div class="logo">
+            <span>Star</span>
+            <img src="/images/logo-2.png" alt="LOGO"/>
+        </div>
+        <div class="intro">鲜花与掌声，献给时光</div>
+        <nav id="sidebar-nav">
+            
+            <a href="/"><i class="fa fa-bars"></i>Home</a>
+            
+            <a href="/archives"><i class="fa fa-bars"></i>Archives</a>
+            
+            <a href="/categories"><i class="fa fa-bars"></i>Categories</a>
+            
+            <a href="/tags"><i class="fa fa-bars"></i>Tags</a>
+            
+        </nav>
+        <div id="sidebar-bottom">
+            <ul class="social">
+                <li><a href=""><i class="fa fa-github"></i></a></li>
+                <li><a href=""><i class="fa fa-facebook"></i></a></li>
+                <li><a href=""><i class="fa fa-weibo"></i></a></li>
+                <li><a href=""><i class="fa fa-qq"></i></a></li>
+                <li><a href=""><i class="fa fa-weixin"></i></a></li>
+            </ul>
+            <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 star&nbsp;
+      - <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+        </div>
+    </div>
+</aside>
+      <section id="main" class="outer ml-has-sidebar"><article id="post-2016-01-09-ES6-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ES6中的块作用域
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/01/09/2016-01-09-ES6-1/" class="article-date">
+  <time datetime="2016-01-08T16:00:00.000Z" itemprop="datePublished">2016-01-09</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/code/">code</a><span>></span><a class="article-category-link" href="/categories/code/ES6/">ES6</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="u7B80_u4ECB"><a href="#u7B80_u4ECB" class="headerlink" title="简介"></a>简介</h2><p>ES6是JavaScript语言的一次重大更新，于2015年6月正式发布。它的目标是利用Javascript可以构建复杂的应用程序。</p>
+<p>各大浏览器推出的最新版本已经对ES6有了更高的支持度，实际的支持情况可以查看<a href="http://kangax.github.io/compat-table/es6/" target="_blank" rel="external">kangax.github.io/es5-compat-table/es6/</a>, 如果你不放心你的代码是否可以在所有的浏览器上运行，可以使用<a href="https://babeljs.io/" target="_blank" rel="external">Babel</a>转码器将ES6转为ES5的代码。</p>
+<h2 id="u8BED_u6CD5"><a href="#u8BED_u6CD5" class="headerlink" title="语法"></a>语法</h2><p>本文的示例代码使用ES6，你可以利用<a href="http://www.es6fiddle.net/" target="_blank" rel="external">ES6Fiddle</a>，或者<a href="http://babeljs.io/repl/" target="_blank" rel="external">Babel转码器命令行工具</a>来运行代码。</p>
+<h3 id="u5757_u4F5C_u7528_u57DF_u58F0_u660E"><a href="#u5757_u4F5C_u7528_u57DF_u58F0_u660E" class="headerlink" title="块作用域声明"></a>块作用域声明</h3><p>在Javascript中，作用域是<code>function</code>范围内的。如果你需要一个块作用域，最常用的方式就是使用IIFE(立即执行函数)。例如:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">IIFE</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">3</span>;</span><br><span class="line">    <span class="built_in">console</span>.log( a );   <span class="comment">// 3</span></span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log( a );       <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+<h3 id="let__u58F0_u660E"><a href="#let__u58F0_u660E" class="headerlink" title="<code>let</code> 声明"></a><code>let</code> 声明</h3><p>有了ES6，现在我们可以创建块作用域。我们不要 <code>var</code> 标识符，取而代之的是 <code>let</code> 标识符:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">3</span>;</span><br><span class="line">    <span class="built_in">console</span>.log( a );   <span class="comment">// 3</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log( a );       <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+<p>这是一个定义块作用域最好的方式，利用 <code>{...}</code> 将作用域括起来， 建议将所有的变量声明放在最顶端，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;  </span><br><span class="line"> <span class="keyword">let</span> a = <span class="number">2</span>, b, c;</span><br><span class="line">    <span class="comment">// ..</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这是一个良好的编码习惯。</p>
+<p>有另外一种<code>let</code> 声明的实验形式(不是标准形式)，叫做 let-块，是这样的:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> (a = <span class="number">2</span>, b, c) &#123;</span><br><span class="line">    <span class="comment">// ..</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这种声明形式更加的清晰，对比上面的两种形式，它们是十分相似的。不幸的是ES6标准采用了上面这种形式，而不是下面这种更加清晰的清晰的方案。</p>
+<p>为了说明 <code>let ..</code> 声明的implicit，考虑下面这种使用方法:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (a &gt; <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> b = a * <span class="number">3</span>;</span><br><span class="line">    <span class="built_in">console</span>.log( b );       <span class="comment">// 6</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = a; i &lt;= b; i++) &#123;</span><br><span class="line">        <span class="keyword">let</span> j = i + <span class="number">10</span>;</span><br><span class="line">        <span class="built_in">console</span>.log( j );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 12 13 14 15 16</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> c = a + b;</span><br><span class="line">    <span class="built_in">console</span>.log( c );       <span class="comment">// 8</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>哪些变量仅仅在 <code>if</code> 语句中存在，哪些变量在<code>for</code> 语句中存在？</p>
+<p>答案是: <code>if</code> 语句包含了<code>a</code> 和<code>b</code> , <code>for</code> 语句包含了<code>i</code> 和 <code>j</code>。</p>
+<p>我们再看一种情况，如果<code>let</code> 的声明太晚会引起一些错误。不像<code>var</code> 会有声明的提升：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="built_in">console</span>.log( a );   <span class="comment">// undefined</span></span><br><span class="line">    <span class="built_in">console</span>.log( b );   <span class="comment">// ReferenceError!</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> a;</span><br><span class="line">    <span class="keyword">let</span> b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行<code>console.log(b)</code> 时会有个错误，因为你调用了一个还没有被初始化的变量。变量<code>b</code> 在作用域内已经被声明了，但是直到 <code>let b</code> 语句执行之前， 变量<code>b</code> 没有被初始化，在这之前想要获取<code>b</code> 的值会引发一个错误。注意：转化为ES5的代码，并不会引发这个错误。</p>
+<h4 id="let_+_for"><a href="#let_+_for" class="headerlink" title="<code>let</code> + <code>for</code>"></a><code>let</code> + <code>for</code></h4><p>考虑：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> funcs = [];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">    funcs.push( <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log( i );</span><br><span class="line">    &#125; );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">funcs[<span class="number">3</span>]();     <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+<p><code>let i</code> 语句为循环的每一次迭代重新定义了一个新的 <code>i</code>。 这意味在循环内部创建了一个闭包。</p>
+<p>如果你使用 <code>var i</code> ，最后输出的结果是5而不是3, 这是因为作用域内仅仅一个变量 <code>i</code> 被闭包闭合，而不是每一次都有一个新的变量 <code>i</code>。</p>
+<p>可以通过下面的代码，实现相同的效果:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> funcs = [];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> j = i;</span><br><span class="line">    funcs.push( <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log( j );</span><br><span class="line">    &#125; );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">funcs[<span class="number">3</span>]();     <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+<p>在上面的代码中我们每次都创建一个新的变量j，所以和前面的代码有相同的原理。</p>
+<h3 id="const_u58F0_u660E"><a href="#const_u58F0_u660E" class="headerlink" title="<code>const</code>声明"></a><code>const</code>声明</h3><p>有另外一种块作用域声明方式：<code>const</code> 用来创建常量。</p>
+<p>常量是初始化后read-only的变量。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="keyword">const</span> a = <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">console</span>.log( a );   <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line">    a = <span class="number">3</span>;              <span class="comment">// TypeError!</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>常量并不是对值的限制，而是对变量赋值的限制。<code>const</code> 并不是让变量的值不能变，而是让变量不能够被赋值。如果值是一个数组或者一个对象，值的内容是可以被修改的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="keyword">const</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line">    a.push( <span class="number">4</span> );</span><br><span class="line">    <span class="built_in">console</span>.log( a );       <span class="comment">// [1,2,3,4]</span></span><br><span class="line"></span><br><span class="line">    a = <span class="number">42</span>;                 <span class="comment">// TypeError!</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>变量 <code>a</code> 并不是一个常数组，而是它有一个到这数组的常量引用，这个数组是可变的。</p>
+<h4 id="const_or_not"><a href="#const_or_not" class="headerlink" title="<code>const</code> or not"></a><code>const</code> or not</h4><p>有传闻说JS引擎能够对 <code>const</code> 进行优化， 相对于这一点，更重要的是你是否需要一个常量值。</p>
+<p>所以建议仅仅在你需要显示表明这个值不可变的情况下使用 <code>const</code>， 而不是依赖 <code>const</code> 对代码的效率进行优化。</p>
+<h3 id="u5757_u4F5C_u7528_u57DF_u4E2D_u7684_u51FD_u6570"><a href="#u5757_u4F5C_u7528_u57DF_u4E2D_u7684_u51FD_u6570" class="headerlink" title="块作用域中的函数"></a>块作用域中的函数</h3><p>考虑如下代码:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    foo();                  <span class="comment">// works!</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// ..</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo();                      <span class="comment">// ReferenceError</span></span><br></pre></td></tr></table></figure>
+<p><code>foo()</code> 函数在块作用域中声明，多以无法在作用域外被调用。需要注意的是，在作用域内，像以前一样，函数声明具有声明提升的效果。</p>
+<p>像下面这样的代码就会有问题:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (something) &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log( <span class="string">"1"</span> );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log( <span class="string">"2"</span> );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo();      <span class="comment">// ??</span></span><br></pre></td></tr></table></figure>
+<p>在之前的ES环境中，不管something的值，运行结果是2。因为函数声明的提升效果，而且往往后面的声明会战胜前面的声明。</p>
+<p>在ES6中，会得到一个引用错误。</p>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>在ES6中可以使用 <code>let</code>, <code>const</code> 得到块作用域，在作用域中声明的变量，作用域之外无法访问。并且，函数的声明也是块作用域，在作用域内， <code>let</code> 的声明没有变量提升的效果，函数的声明仍旧有提升的效果。</p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/10/2016-01-09-ES6-2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          ES6中的...，默认参数和解构赋值
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/06/2015-09-05-box-position-in-CSS/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Box position in CSS&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-2016-01-09-ES6-1" data-title="ES6中的块作用域" data-url="http://yoursite.com/2016/01/09/2016-01-09-ES6-1/">
+
+    </div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:'starow'};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</section>
+</section>
+    </div>
+    
+
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>

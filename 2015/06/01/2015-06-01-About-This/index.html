@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaScript中的This - 徐鑫鑫的BLOG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="由于this的运行期绑定的特性，它可以是全局对象，当前对象或者任意对象，这完全取决于函数的调用方式。
+函数是否被new操作符调用Javascript中没有类的概念，相应的，它的构造函数的概念也十分的特别。如果没有用new操作符调用，就和普通函数一样，如果有了new，就变成了一个构造函数。作为一个约定俗成的写法，构造函数以大写字母开头。
+12345 function Point(x, y)&amp;#123">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript中的This">
+<meta property="og:url" content="http://yoursite.com/2015/06/01/2015-06-01-About-This/index.html">
+<meta property="og:site_name" content="徐鑫鑫的BLOG">
+<meta property="og:description" content="由于this的运行期绑定的特性，它可以是全局对象，当前对象或者任意对象，这完全取决于函数的调用方式。
+函数是否被new操作符调用Javascript中没有类的概念，相应的，它的构造函数的概念也十分的特别。如果没有用new操作符调用，就和普通函数一样，如果有了new，就变成了一个构造函数。作为一个约定俗成的写法，构造函数以大写字母开头。
+12345 function Point(x, y)&amp;#123">
+<meta property="og:updated_time" content="2016-01-07T08:38:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript中的This">
+<meta name="twitter:description" content="由于this的运行期绑定的特性，它可以是全局对象，当前对象或者任意对象，这完全取决于函数的调用方式。
+函数是否被new操作符调用Javascript中没有类的概念，相应的，它的构造函数的概念也十分的特别。如果没有用new操作符调用，就和普通函数一样，如果有了new，就变成了一个构造函数。作为一个约定俗成的写法，构造函数以大写字母开头。
+12345 function Point(x, y)&amp;#123">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/webfonts/font-awesome-4.3.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+  <script src="/js/jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="container">
+    <div class="wrap">
+      <button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
+      <aside id="sidebar">
+    <div class="sidebar-wrap">
+        <button class="hide-button">
+            <i class="fa fa-angle-double-left"></i>
+        </button>
+        <button class="close-button fa fa-fw fa-close"></button>
+        <div class="logo">
+            <span>Star</span>
+            <img src="/images/logo-2.png" alt="LOGO"/>
+        </div>
+        <div class="intro">鲜花与掌声，献给时光</div>
+        <nav id="sidebar-nav">
+            
+            <a href="/"><i class="fa fa-bars"></i>Home</a>
+            
+            <a href="/archives"><i class="fa fa-bars"></i>Archives</a>
+            
+            <a href="/categories"><i class="fa fa-bars"></i>Categories</a>
+            
+            <a href="/tags"><i class="fa fa-bars"></i>Tags</a>
+            
+        </nav>
+        <div id="sidebar-bottom">
+            <ul class="social">
+                <li><a href=""><i class="fa fa-github"></i></a></li>
+                <li><a href=""><i class="fa fa-facebook"></i></a></li>
+                <li><a href=""><i class="fa fa-weibo"></i></a></li>
+                <li><a href=""><i class="fa fa-qq"></i></a></li>
+                <li><a href=""><i class="fa fa-weixin"></i></a></li>
+            </ul>
+            <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 star&nbsp;
+      - <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+        </div>
+    </div>
+</aside>
+      <section id="main" class="outer ml-has-sidebar"><article id="post-2015-06-01-About-This" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript中的This
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2015/06/01/2015-06-01-About-This/" class="article-date">
+  <time datetime="2015-05-31T16:00:00.000Z" itemprop="datePublished">2015-06-01</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/code/">code</a><span>></span><a class="article-category-link" href="/categories/code/JS/">JS</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>由于this的运行期绑定的特性，它可以是全局对象，当前对象或者任意对象，这完全取决于函数的调用方式。</p>
+<h2 id="u51FD_u6570_u662F_u5426_u88ABnew_u64CD_u4F5C_u7B26_u8C03_u7528"><a href="#u51FD_u6570_u662F_u5426_u88ABnew_u64CD_u4F5C_u7B26_u8C03_u7528" class="headerlink" title="函数是否被new操作符调用"></a>函数是否被new操作符调用</h2><p>Javascript中没有类的概念，相应的，它的构造函数的概念也十分的特别。如果没有用new操作符调用，就和普通函数一样，如果有了new，就变成了一个构造函数。作为一个约定俗成的写法，构造函数以大写字母开头。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Point</span>(<span class="params">x, y</span>)</span>&#123; </span><br><span class="line">    <span class="keyword">this</span>.x = x; </span><br><span class="line">    <span class="keyword">this</span>.y = y; </span><br><span class="line"> &#125;</span><br><span class="line"><span class="keyword">var</span> point = <span class="keyword">new</span> Point(<span class="number">0</span>,<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<p>如果是一个构造函数，this绑定到新构造出来的函数中。也就是说上面这段代码会生成一个对象，将this绑定到这个对象上，函数执行结束之后返回这个对象。</p>
+<h2 id="u51FD_u6570_u662F_u5426_u901A_u8FC7apply_u548Ccall_u8C03_u7528"><a href="#u51FD_u6570_u662F_u5426_u901A_u8FC7apply_u548Ccall_u8C03_u7528" class="headerlink" title="函数是否通过apply和call调用"></a>函数是否通过apply和call调用</h2><p>在Javascript中函数也是对象，是一种特殊的对象。那么函数也有属性也有方法，最著名的属性是<code>prototype</code>,最著名的方法是<code>apply</code>和<code>call</code>。apply和call的区别是如果知道传入函数的参数就使用call,如果不确定参数，使用的是arguments数组传参，那么就用apply。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Point</span>(<span class="params">x, y</span>)</span>&#123; </span><br><span class="line">   <span class="keyword">this</span>.x = x; </span><br><span class="line">   <span class="keyword">this</span>.y = y; </span><br><span class="line">   <span class="keyword">this</span>.moveTo = <span class="function"><span class="keyword">function</span>(<span class="params">x, y</span>)</span>&#123; </span><br><span class="line">       <span class="keyword">this</span>.x = x; </span><br><span class="line">       <span class="keyword">this</span>.y = y; </span><br><span class="line">   &#125; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> p1 = <span class="keyword">new</span> Point(<span class="number">0</span>, <span class="number">0</span>); </span><br><span class="line"><span class="keyword">var</span> p2 = &#123;x: <span class="number">0</span>, y: <span class="number">0</span>&#125;; </span><br><span class="line">p1.moveTo(<span class="number">1</span>, <span class="number">1</span>); </span><br><span class="line">p1.moveTo.apply(p2, [<span class="number">10</span>, <span class="number">10</span>]);</span><br></pre></td></tr></table></figure></p>
+<p>首先利用构造函数生成一个对象p1，该对象具有moveTo方法。利用对象字面量的方法生成另外一个对象p2。调用p1.moveTo的apply(通过数组传递参数)方法，将运行时这个函数的this绑定到apply中的第一个参数也就是p2对象上。</p>
+<p>总结一下，利用apply和call方法，就是将调用这个方法的函数运行时的this绑定到第一个参数。在例子中，就是将this.moveTo方法的this绑定到p2对象中。</p>
+<h2 id="u51FD_u6570_u662F_u5426_u6709_u5BF9_u8C61_u4E0A_u4E0B_u6587"><a href="#u51FD_u6570_u662F_u5426_u6709_u5BF9_u8C61_u4E0A_u4E0B_u6587" class="headerlink" title="函数是否有对象上下文"></a>函数是否有对象上下文</h2><p>通俗的说就是这个函数是不是对象调用的，比方说上面那个例子中的p1.moveTo(1,1)，这个moveTo方法就是p1对象调用的，等价于p1.moveTo(p1,[1,1])。 如果函数调用有对象上下文，this绑定到这个对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> point = &#123; </span><br><span class="line">x : <span class="number">0</span>, </span><br><span class="line">y : <span class="number">0</span>, </span><br><span class="line">moveTo : <span class="function"><span class="keyword">function</span>(<span class="params">x, y</span>) </span>&#123; </span><br><span class="line">    <span class="keyword">this</span>.x = <span class="keyword">this</span>.x + x; </span><br><span class="line">    <span class="keyword">this</span>.y = <span class="keyword">this</span>.y + y; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">point.moveTo(<span class="number">1</span>, <span class="number">1</span>)<span class="comment">//this 绑定到当前对象，即 point 对象</span></span><br></pre></td></tr></table></figure>
+<p>上面这个例子就是将函数里面的this绑定到调用的对象上。</p>
+<h2 id="u5982_u679C_u4E0A_u9762_u8FD9_u4E9B_u90FD_u6CA1_u6709"><a href="#u5982_u679C_u4E0A_u9762_u8FD9_u4E9B_u90FD_u6CA1_u6709" class="headerlink" title="如果上面这些都没有"></a>如果上面这些都没有</h2><p>如果函数执行的时候没有new，也不是通过apply和call调用的，前面也没有对象，那么this就是绑定到window当中。据说这个设计是毫无用处的，不管在什么情况下，我们都不需要将this绑定到window，但是它就是这么设计的，记住它吧。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> point = &#123; </span><br><span class="line">x : <span class="number">0</span>, </span><br><span class="line">y : <span class="number">0</span>, </span><br><span class="line">moveTo : <span class="function"><span class="keyword">function</span>(<span class="params">x, y</span>) </span>&#123; </span><br><span class="line">    <span class="keyword">this</span>.x = <span class="keyword">this</span>.x + x; </span><br><span class="line">    <span class="keyword">this</span>.y = <span class="keyword">this</span>.y + y; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;; </span><br><span class="line">move =point.moveTo(<span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">move(<span class="number">1</span>,<span class="number">1</span>);       <span class="comment">//我被绑定到window上了，会生成全局变量x,y</span></span><br></pre></td></tr></table></figure>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>this的绑定就上面这四种情况，分析起来还是不难的吧？在新的ES6标准中fat arrow也会涉及到this的绑定。</p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/This/">This</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/07/04/2015-07-04-Something-about-CSS/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          漫谈CSS—BOX
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/05/30/2015-05-30-JavaScript-Closure/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaScript 闭包&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-2015-06-01-About-This" data-title="JavaScript中的This" data-url="http://yoursite.com/2015/06/01/2015-06-01-About-This/">
+
+    </div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:'starow'};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</section>
+</section>
+    </div>
+    
+
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>

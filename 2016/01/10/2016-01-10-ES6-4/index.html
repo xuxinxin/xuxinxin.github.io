@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ES6中的箭头函数 - 徐鑫鑫的BLOG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Arrow 函数this 是Javascript中比较复杂的机制，ES6发明箭头函数的主要动机就是解决基于 this 编程的麻烦。
+首先通过下面的代码说明一下箭头函数：
+1234567function foo(x,y) &amp;#123;    return x + y;&amp;#125;// versusvar foo = (x,y) =&amp;gt; x + y;
+箭头函数由一个参数列表（被 (..) 包围的0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6中的箭头函数">
+<meta property="og:url" content="http://yoursite.com/2016/01/10/2016-01-10-ES6-4/index.html">
+<meta property="og:site_name" content="徐鑫鑫的BLOG">
+<meta property="og:description" content="Arrow 函数this 是Javascript中比较复杂的机制，ES6发明箭头函数的主要动机就是解决基于 this 编程的麻烦。
+首先通过下面的代码说明一下箭头函数：
+1234567function foo(x,y) &amp;#123;    return x + y;&amp;#125;// versusvar foo = (x,y) =&amp;gt; x + y;
+箭头函数由一个参数列表（被 (..) 包围的0">
+<meta property="og:updated_time" content="2016-01-11T13:31:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6中的箭头函数">
+<meta name="twitter:description" content="Arrow 函数this 是Javascript中比较复杂的机制，ES6发明箭头函数的主要动机就是解决基于 this 编程的麻烦。
+首先通过下面的代码说明一下箭头函数：
+1234567function foo(x,y) &amp;#123;    return x + y;&amp;#125;// versusvar foo = (x,y) =&amp;gt; x + y;
+箭头函数由一个参数列表（被 (..) 包围的0">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/webfonts/font-awesome-4.3.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+  <script src="/js/jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="container">
+    <div class="wrap">
+      <button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
+      <aside id="sidebar">
+    <div class="sidebar-wrap">
+        <button class="hide-button">
+            <i class="fa fa-angle-double-left"></i>
+        </button>
+        <button class="close-button fa fa-fw fa-close"></button>
+        <div class="logo">
+            <span>Star</span>
+            <img src="/images/logo-2.png" alt="LOGO"/>
+        </div>
+        <div class="intro">鲜花与掌声，献给时光</div>
+        <nav id="sidebar-nav">
+            
+            <a href="/"><i class="fa fa-bars"></i>Home</a>
+            
+            <a href="/archives"><i class="fa fa-bars"></i>Archives</a>
+            
+            <a href="/categories"><i class="fa fa-bars"></i>Categories</a>
+            
+            <a href="/tags"><i class="fa fa-bars"></i>Tags</a>
+            
+        </nav>
+        <div id="sidebar-bottom">
+            <ul class="social">
+                <li><a href=""><i class="fa fa-github"></i></a></li>
+                <li><a href=""><i class="fa fa-facebook"></i></a></li>
+                <li><a href=""><i class="fa fa-weibo"></i></a></li>
+                <li><a href=""><i class="fa fa-qq"></i></a></li>
+                <li><a href=""><i class="fa fa-weixin"></i></a></li>
+            </ul>
+            <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 star&nbsp;
+      - <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+        </div>
+    </div>
+</aside>
+      <section id="main" class="outer ml-has-sidebar"><article id="post-2016-01-10-ES6-4" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ES6中的箭头函数
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/01/10/2016-01-10-ES6-4/" class="article-date">
+  <time datetime="2016-01-09T16:00:00.000Z" itemprop="datePublished">2016-01-10</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/code/">code</a><span>></span><a class="article-category-link" href="/categories/code/ES6/">ES6</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Arrow__u51FD_u6570"><a href="#Arrow__u51FD_u6570" class="headerlink" title="Arrow 函数"></a>Arrow 函数</h2><p><code>this</code> 是Javascript中比较复杂的机制，ES6发明箭头函数的主要动机就是解决基于 <code>this</code> 编程的麻烦。</p>
+<p>首先通过下面的代码说明一下箭头函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">x,y</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// versus</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> foo = (x,y) =&gt; x + y;</span><br></pre></td></tr></table></figure>
+<p>箭头函数由一个参数列表（被 <code>(..)</code> 包围的0个或多个参数），紧跟着 <code>=&gt;</code> 操作符，最后是函数主题组成。</p>
+<p>所以 <code>(x,y) =&gt; x + y</code>这一部分是箭头函数，然后这个函数赋值给变量 <code>foo</code>。</p>
+<p>如果函数体里面的语句不止一句，那么可以用 <code>{}</code> 将这些语句包裹起来。如果只有一条语句，那么可以省略大括号并且这条语句的结果默认作为返回值返回，即使没有 <code>return</code>。 下面是几个箭头函数的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f1 = () =&gt; <span class="number">12</span>;</span><br><span class="line"><span class="keyword">var</span> f2 = x =&gt; x * <span class="number">2</span>;</span><br><span class="line"><span class="keyword">var</span> f3 = (x,y) =&gt; &#123;</span><br><span class="line">    <span class="keyword">var</span> z = x * <span class="number">2</span> + y;</span><br><span class="line">    y++;</span><br><span class="line">    x *= <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">return</span> (x + y + z) / <span class="number">2</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>箭头函数是匿名函数表达式，无法通过函数名来得到对箭头函数的引用。 所有的一般函数所具有的能力如，默认参数值，解构赋值，折叠参数等等，箭头函数都具有。</p>
+<p>使用箭头函数可以让代码更加简短，易读：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line">a = a.map( v =&gt; v * <span class="number">2</span> );</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log( a );               <span class="comment">// [2,4,6,8,10]</span></span><br></pre></td></tr></table></figure>
+<p>对于代码比较少的函数，使用箭头函数带来的好处非常明显，但是如果代码很长，可能用正常的函数会比较清晰。</p>
+<h3 id="u4E0D_u4EC5_u4EC5_u662F_u8BED_u6CD5_uFF0C_u8FD8_u6709_this"><a href="#u4E0D_u4EC5_u4EC5_u662F_u8BED_u6CD5_uFF0C_u8FD8_u6709_this" class="headerlink" title="不仅仅是语法，还有 <code>this</code>"></a>不仅仅是语法，还有 <code>this</code></h3><p>我们的注意力都在箭头函数可以让代码更短上，但是我们之前提到发明箭头函数的重要动机是解决 <code>this</code> 带来的痛点。</p>
+<p>我们看一个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> controller = &#123;</span><br><span class="line">    makeRequest: <span class="function"><span class="keyword">function</span>(<span class="params">..</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> self = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">        btn.addEventListener( <span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="comment">// ..</span></span><br><span class="line">            self.makeRequest(..);</span><br><span class="line">        &#125;, <span class="literal">false</span> );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>在上面的代码中，我们使用了 <code>self = this</code> 的技巧，因 <code>this</code> 的动态绑定，<code>click</code>事件发生时，调用函数的 <code>this</code> 并没有和 <code>controller</code> 绑定。</p>
+<p>在箭头函数中，<code>this</code> 并不是动态绑定的，如果上面的例子使用箭头函数， <code>this</code> 会以我们需要的方式绑定。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> controller = &#123;</span><br><span class="line">    makeRequest: <span class="function"><span class="keyword">function</span>(<span class="params">..</span>)</span>&#123;</span><br><span class="line">        btn.addEventListener( <span class="string">"click"</span>, () =&gt; &#123;</span><br><span class="line">            <span class="comment">// ..</span></span><br><span class="line">            <span class="keyword">this</span>.makeRequest(..);</span><br><span class="line">        &#125;, <span class="literal">false</span> );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>再下面的这段代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> controller = &#123;</span><br><span class="line">    makeRequest: (..) =&gt; &#123;</span><br><span class="line">        <span class="comment">// ..</span></span><br><span class="line">        <span class="keyword">this</span>.helper(..);</span><br><span class="line">    &#125;,</span><br><span class="line">    helper: (..) =&gt; &#123;</span><br><span class="line">        <span class="comment">// ..</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">controller.makeRequest(..);</span><br></pre></td></tr></table></figure>
+<p>当我们执行 <code>controller.makeRequest(..)</code> 时 <code>this.helper</code>引用失败，因为 <code>this</code> 这里没有指向 <code>controller</code> 。 this的指向是从周围的环境继承而来，所以，在上面的代码中， <code>this</code> 指向的是全局对象。</p>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>ES6引入了箭头函数，不仅仅带来了代码的简洁，并且解决了 <code>this</code> 存在的一个问题。</p>
+<ul>
+<li>如果你的代码很短，函数里没有 <code>this</code> 的引用，也没有递归，你可以使用箭头函数替代之</li>
+<li>如果你的代码依赖 <code>var self = this</code> 或者 <code>.bind(this)</code> 可以使用箭头函数来替代</li>
+<li>对于其他情况，你要谨慎使用箭头函数</li>
+</ul>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Arrow-Function/">Arrow Function</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/11/2016-01-11-ES6-5/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          ES6 中的迭代器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/10/2016-01-10-ES6-3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ES6中的对象与字符串&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-2016-01-10-ES6-4" data-title="ES6中的箭头函数" data-url="http://yoursite.com/2016/01/10/2016-01-10-ES6-4/">
+
+    </div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:'starow'};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</section>
+</section>
+    </div>
+    
+
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>

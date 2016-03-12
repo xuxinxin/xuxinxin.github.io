@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CSS layout - 徐鑫鑫的BLOG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. display 属性display是CSS中最重要的用于控制布局的属性。大多数元素的默认值为block 和 inline，就是平常所说的块级元素和內连元素。
+block一个块级元素会新开始一行并且尽可能撑满容器。块级元素，此元素前后会带有换行符。常用的块级元素为：div,p,form,以及HTML5中的section，header，footer
+inline一个行内元素可以在段落中像这样包裹">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS layout">
+<meta property="og:url" content="http://yoursite.com/2015/03/23/2015-03-23-CSS-layout/index.html">
+<meta property="og:site_name" content="徐鑫鑫的BLOG">
+<meta property="og:description" content="1. display 属性display是CSS中最重要的用于控制布局的属性。大多数元素的默认值为block 和 inline，就是平常所说的块级元素和內连元素。
+block一个块级元素会新开始一行并且尽可能撑满容器。块级元素，此元素前后会带有换行符。常用的块级元素为：div,p,form,以及HTML5中的section，header，footer
+inline一个行内元素可以在段落中像这样包裹">
+<meta property="og:image" content="https://dev.opera.com/articles/an-introduction-to-meta-viewport-and-viewport/specific-width_small.jpg">
+<meta property="og:image" content="https://dev.opera.com/articles/an-introduction-to-meta-viewport-and-viewport/device-width_small.jpg">
+<meta property="og:updated_time" content="2016-01-07T08:53:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS layout">
+<meta name="twitter:description" content="1. display 属性display是CSS中最重要的用于控制布局的属性。大多数元素的默认值为block 和 inline，就是平常所说的块级元素和內连元素。
+block一个块级元素会新开始一行并且尽可能撑满容器。块级元素，此元素前后会带有换行符。常用的块级元素为：div,p,form,以及HTML5中的section，header，footer
+inline一个行内元素可以在段落中像这样包裹">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/webfonts/font-awesome-4.3.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+  <script src="/js/jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="container">
+    <div class="wrap">
+      <button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
+      <aside id="sidebar">
+    <div class="sidebar-wrap">
+        <button class="hide-button">
+            <i class="fa fa-angle-double-left"></i>
+        </button>
+        <button class="close-button fa fa-fw fa-close"></button>
+        <div class="logo">
+            <span>Star</span>
+            <img src="/images/logo-2.png" alt="LOGO"/>
+        </div>
+        <div class="intro">鲜花与掌声，献给时光</div>
+        <nav id="sidebar-nav">
+            
+            <a href="/"><i class="fa fa-bars"></i>Home</a>
+            
+            <a href="/archives"><i class="fa fa-bars"></i>Archives</a>
+            
+            <a href="/categories"><i class="fa fa-bars"></i>Categories</a>
+            
+            <a href="/tags"><i class="fa fa-bars"></i>Tags</a>
+            
+        </nav>
+        <div id="sidebar-bottom">
+            <ul class="social">
+                <li><a href=""><i class="fa fa-github"></i></a></li>
+                <li><a href=""><i class="fa fa-facebook"></i></a></li>
+                <li><a href=""><i class="fa fa-weibo"></i></a></li>
+                <li><a href=""><i class="fa fa-qq"></i></a></li>
+                <li><a href=""><i class="fa fa-weixin"></i></a></li>
+            </ul>
+            <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 star&nbsp;
+      - <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+        </div>
+    </div>
+</aside>
+      <section id="main" class="outer ml-has-sidebar"><article id="post-2015-03-23-CSS-layout" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CSS layout
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2015/03/23/2015-03-23-CSS-layout/" class="article-date">
+  <time datetime="2015-03-22T16:00:00.000Z" itemprop="datePublished">2015-03-23</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/code/">code</a><span>></span><a class="article-category-link" href="/categories/code/CSS/">CSS</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-_display__u5C5E_u6027"><a href="#1-_display__u5C5E_u6027" class="headerlink" title="1. display 属性"></a>1. display 属性</h2><p><em>display</em>是CSS中最重要的用于控制布局的属性。大多数元素的默认值为<strong>block</strong> 和 <strong>inline</strong>，就是平常所说的块级元素和內连元素。</p>
+<h3 id="block"><a href="#block" class="headerlink" title="block"></a>block</h3><p>一个块级元素会新开始一行并且尽可能撑满容器。块级元素，此元素前后会带有换行符。常用的块级元素为：<strong>div</strong>,<strong>p</strong>,<strong>form</strong>,以及HTML5中的<strong>section</strong>，<strong>header</strong>，<strong>footer</strong></p>
+<h3 id="inline"><a href="#inline" class="headerlink" title="inline"></a>inline</h3><p>一个行内元素可以在段落中<span\>像这样</span\>包裹一些文字而不会打乱段落的布局,元素前后没有换行符。</p>
+<h3 id="none"><a href="#none" class="headerlink" title="none"></a>none</h3><p>另一个常用的值是<strong>none</strong>。通常结合Javascript来实现一些效果，它和 visibility 属性不一样。把 display 设置成 none 不会保留元素本该显示的空间，但是 visibility: hidden; 还会保留。</p>
+<h2 id="2-_margin"><a href="#2-_margin" class="headerlink" title="2. margin"></a>2. margin</h2><p>设置块级元素的<strong>width</strong>可以阻止它从左到右撑满整个容器。随后设置左右外边距为<strong>auto</strong> 来使它居中。</p>
+<p>当浏览器的宽度小于这个元素的宽度会怎么样呢？解决这个问题的办法是将<strong>width</strong>，换成<strong>max-width</strong>。很奇怪，为什么不是min-width呢？</p>
+<h2 id="3-__u76D2_u6A21_u578B"><a href="#3-__u76D2_u6A21_u578B" class="headerlink" title="3. 盒模型"></a>3. 盒模型</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.simple</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">500px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">margin</span>:<span class="value"> <span class="number">20px</span> auto</span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="class">.fancy</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">500px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">margin</span>:<span class="value"> <span class="number">20px</span> auto</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">50px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">border-width</span>:<span class="value"> <span class="number">10px</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>上面这段代码一样的<strong>width</strong>,结果得到图形却是不一样宽的。以前代代相传的终极法宝是用数学计算。现在你终于不用再这样做了，可以通过设置<strong>box-sizing</strong>值为<strong>border-box</strong>来解决:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.simple</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">500px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">margin</span>:<span class="value"> <span class="number">20px</span> auto</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-webkit-box-sizing</span>:<span class="value"> border-box</span></span>;</span><br><span class="line">     <span class="rule"><span class="attribute">-moz-box-sizing</span>:<span class="value"> border-box</span></span>;</span><br><span class="line">          <span class="rule"><span class="attribute">box-sizing</span>:<span class="value"> border-box</span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="class">.fancy</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">500px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">margin</span>:<span class="value"> <span class="number">20px</span> auto</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">50px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">border</span>:<span class="value"> solid blue <span class="number">10px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-webkit-box-sizing</span>:<span class="value"> border-box</span></span>;</span><br><span class="line">     <span class="rule"><span class="attribute">-moz-box-sizing</span>:<span class="value"> border-box</span></span>;</span><br><span class="line">          <span class="rule"><span class="attribute">box-sizing</span>:<span class="value"> border-box</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>现在它们一样大了。</p>
+<h2 id="4-_position"><a href="#4-_position" class="headerlink" title="4. position"></a>4. position</h2><p>为了制作更复杂的布局，我们需要讨论<strong>position</strong>属性。属性值为<strong>static, relative, absolute, fixed</strong>。</p>
+<p>我们分别看一下：</p>
+<h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><p><strong>static</strong>是默认值，satic元素表示它不会被特殊定位。</p>
+<h3 id="relative"><a href="#relative" class="headerlink" title="relative"></a>relative</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.relative1</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> relative</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p><strong>relative</strong>表现得不是和<strong>static</strong>一样吗？如果你设置了<strong>top,right,bottom,left</strong>之后呢？<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.relative2</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> relative</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">top</span>:<span class="value"> -<span class="number">20px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">20px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">background-color</span>:<span class="value"> white</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">500px</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>现在是不是能体会到<strong>relative</strong>属性的表现了。另外，其他元素不会调整位置来弥补它偏离后剩下的空隙。</p>
+<h3 id="fixed"><a href="#fixed" class="headerlink" title="fixed"></a>fixed</h3><p>一个<strong>fixed</strong>元素会相对于视窗来定位，这意味着即便页面滚动，它还是会停留在相同的位置。和 <strong>relative</strong> 一样， <strong>top 、 right 、 bottom</strong> 和 <strong>left</strong> 属性都可用。</p>
+<h3 id="absolute"><a href="#absolute" class="headerlink" title="absolute"></a>absolute</h3><p><strong>absolute</strong> 是最棘手的position值。 <strong>absolute</strong> 与 <strong>fixed</strong> 的表现类似，除了它不是相对于视窗而是相对于最近的“positioned”祖先元素。如果绝对定位（position属性的值为absolute）的元素没有 “positioned” 祖先元素，那么它是相对于文档的 body 元素，并且它会<strong>随着页面滚动而移动</strong>。记住一个“positioned”元素是指 <strong>position</strong> 值<strong>不是</strong> <strong>static</strong> 的元素。</p>
+<h2 id="5-_float"><a href="#5-_float" class="headerlink" title="5. float"></a>5. float</h2><p>另一个布局中常用的CSS属性是 <strong>float</strong> 。<strong>Float</strong> 可用于实现文字环绕图片，如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">img</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">float</span>:<span class="value"> right</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">margin</span>:<span class="value"> <span class="number">0</span> <span class="number">0</span> <span class="number">1em</span> <span class="number">1em</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p><strong>float</strong>经常和<strong>clear</strong>一起出现，<strong>clear</strong> 元素用来清除遮挡住它的 <strong>float</strong> 元素。</p>
+<p>试想一下如果一个浮动元素比容器还高，它溢出到了容器外面！这该怎么办才好呢？有一种比较丑陋的方法来解决这个问题</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.clearfix</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">overflow</span>:<span class="value"> auto</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>清除浮动是一个比较难的问题，<a href="http://stackoverflow.com/questions/211383/which-method-of-clearfix-is-best" target="_blank" rel="external">Which method of ‘clearfix’ is best？</a></p>
+<h2 id="6-__u5A92_u4F53_u67E5_u8BE2"><a href="#6-__u5A92_u4F53_u67E5_u8BE2" class="headerlink" title="6. 媒体查询"></a>6. 媒体查询</h2><p>“响应式设计（Responsive Design）”是一种让网站针对不同的浏览器和设备“响应”不同显示效果的策略，这样可以让网站在任何情况下显示的很棒！</p>
+<p>媒体查询是做此事所需的最强大的工具。让我们使用百分比宽度来布局，然后在浏览器变窄到无法容纳侧边栏中的菜单时，把布局显示成一列：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="at_rule">@<span class="keyword">media</span> screen and (min-width:<span class="number">600px</span>) </span>&#123;</span><br><span class="line">  <span class="tag">nav</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">float</span>:<span class="value"> left</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">25%</span></span></span>;</span><br><span class="line">  &#125;</span></span><br><span class="line">  <span class="tag">section</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">margin-left</span>:<span class="value"> <span class="number">25%</span></span></span>;</span><br><span class="line">  &#125;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="at_rule">@<span class="keyword">media</span> screen and (max-width:<span class="number">599px</span>) </span>&#123;</span><br><span class="line">  <span class="tag">nav</span> <span class="tag">li</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">display</span>:<span class="value"> inline</span></span>;</span><br><span class="line">  &#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用<a href="https://dev.opera.com/articles/an-introduction-to-meta-viewport-and-viewport/" target="_blank" rel="external">meta viewport</a>可以让布局在移动浏览器上显示效果更好。</p>
+<h3 id="Viewport"><a href="#Viewport" class="headerlink" title="Viewport"></a>Viewport</h3><p>可以在<head>标签中增加一个viewport的<meta>标签来覆盖默认的viewport 。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"viewport"</span> <span class="attribute">content</span>=<span class="value">"width=320, initial-scale=0.5"</span><span class="value">\</span>&gt;</span></span><br></pre></td></tr></table></figure></head></p>
+<p>将<strong>width</strong>设置为320，浏览器会将内容以320px像素的宽度渲染到屏幕上。如果屏幕实际宽度为360px,内容放大到1.125倍；如果实际宽度为240px,则缩小到0.75倍。<br><img src="https://dev.opera.com/articles/an-introduction-to-meta-viewport-and-viewport/specific-width_small.jpg" alt=""><br>建议将宽度设置成设备屏幕的宽度</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"viewport"</span> <span class="attribute">content</span>=<span class="value">"width=device-width"</span><span class="value">\</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这就告诉浏览器不需要放缩，只要按照屏幕大小来渲染就好了。<br><img src="https://dev.opera.com/articles/an-introduction-to-meta-viewport-and-viewport/device-width_small.jpg" alt=""><br>而initial-scale参数是来设置渲染最初的缩放比例。浏览器首先以设置的宽度进行渲染，然后再根据<strong>initial-scale</strong>进行缩放。</p>
+<h3 id="u66F4_u9AD8DPI_u7684_u5C4F_u5E55"><a href="#u66F4_u9AD8DPI_u7684_u5C4F_u5E55" class="headerlink" title="更高DPI的屏幕"></a>更高DPI的屏幕</h3><p>接下来我们简单看一下如何在更高DPI的屏幕下优化页面。现在移动端设备屏幕有极高的DPI。实际屏幕上的像素值和我们设置的像素值如果等同的话，那么在PC浏览器上正常显示的内容在手机屏幕上就会非常的小。也就是说1个CSS像素包含更多的设备像素。<br>如何解决非矢量图放大之后出现马赛克的现象呢？我们可以设置一个高像素的图，设置他的宽度为一半。在高DPI屏幕上放大2倍后，图片依然能保持清晰。</p>
+<p>回到布局的内容。接下来我们谈一谈inline-block</p>
+<h2 id="inline-block"><a href="#inline-block" class="headerlink" title="inline-block"></a>inline-block</h2><p>如何创建很多网格来铺满浏览器？使用float是一种选择，将所有网格float设置为left，在利用清除浮动的clear元素让显示效果更好。现在我们有更好的选择是 <strong>inline-block</strong> 。将网格的display设置为 <strong>inline-block</strong> 就能实现这个效果，并且不需要清除浮动。使用 <strong>inline-block</strong> 有些你要记住:</p>
+<ul>
+<li><strong>vertical-align</strong>属性会影响到 <strong>inline-block</strong></li>
+<li>你需要设置每一列的宽度</li>
+<li>如果HTML源码中元素有空格，那么列与列之间会有空隙</li>
+</ul>
+<h2 id="7-__u65B0_u7684CSS"><a href="#7-__u65B0_u7684CSS" class="headerlink" title="7. 新的CSS"></a>7. 新的CSS</h2><p>CSS columns可以实现文字的分列显示，<a href="http://www.w3.org/TR/css3-flexbox/" target="_blank" rel="external">flexbox</a>的布局。</p>
+<p>参考<a href="http://zh.learnlayout.com/index.html" target="_blank" rel="external">CSS没有布局</a></p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/layout/">layout</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/04/04/2015-04-04-JS中的面向对象2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          JS中的面向对象（二）
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-2015-03-23-CSS-layout" data-title="CSS layout" data-url="http://yoursite.com/2015/03/23/2015-03-23-CSS-layout/">
+
+    </div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:'starow'};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</section>
+</section>
+    </div>
+    
+
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>

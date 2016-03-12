@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaScript作用域 - 徐鑫鑫的BLOG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="变量是所有编程语言中最基础的概念，我们通过存储，修改变量的值来运行程序。那么变量是如何存放的，如何访问变量？我们将这些规则称为作用域。
+看一个例子&amp;nbsp;1var a =2;
+我们看到这段代码，会认为它是一个语句。但是Javascript的引擎并不这么认为，它首先看到
+ 1var a
+看到这个之后就去查询作用域是否存在 变量a ，如果作用域存在变量a，那么它就会忽略这个声明，否则就将a加入作用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript作用域">
+<meta property="og:url" content="http://yoursite.com/2015/05/16/2015-05-16-JavaScript-Scope/index.html">
+<meta property="og:site_name" content="徐鑫鑫的BLOG">
+<meta property="og:description" content="变量是所有编程语言中最基础的概念，我们通过存储，修改变量的值来运行程序。那么变量是如何存放的，如何访问变量？我们将这些规则称为作用域。
+看一个例子&amp;nbsp;1var a =2;
+我们看到这段代码，会认为它是一个语句。但是Javascript的引擎并不这么认为，它首先看到
+ 1var a
+看到这个之后就去查询作用域是否存在 变量a ，如果作用域存在变量a，那么它就会忽略这个声明，否则就将a加入作用">
+<meta property="og:updated_time" content="2016-01-07T07:42:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript作用域">
+<meta name="twitter:description" content="变量是所有编程语言中最基础的概念，我们通过存储，修改变量的值来运行程序。那么变量是如何存放的，如何访问变量？我们将这些规则称为作用域。
+看一个例子&amp;nbsp;1var a =2;
+我们看到这段代码，会认为它是一个语句。但是Javascript的引擎并不这么认为，它首先看到
+ 1var a
+看到这个之后就去查询作用域是否存在 变量a ，如果作用域存在变量a，那么它就会忽略这个声明，否则就将a加入作用">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/webfonts/font-awesome-4.3.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+  <script src="/js/jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="container">
+    <div class="wrap">
+      <button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
+      <aside id="sidebar">
+    <div class="sidebar-wrap">
+        <button class="hide-button">
+            <i class="fa fa-angle-double-left"></i>
+        </button>
+        <button class="close-button fa fa-fw fa-close"></button>
+        <div class="logo">
+            <span>Star</span>
+            <img src="/images/logo-2.png" alt="LOGO"/>
+        </div>
+        <div class="intro">鲜花与掌声，献给时光</div>
+        <nav id="sidebar-nav">
+            
+            <a href="/"><i class="fa fa-bars"></i>Home</a>
+            
+            <a href="/archives"><i class="fa fa-bars"></i>Archives</a>
+            
+            <a href="/categories"><i class="fa fa-bars"></i>Categories</a>
+            
+            <a href="/tags"><i class="fa fa-bars"></i>Tags</a>
+            
+        </nav>
+        <div id="sidebar-bottom">
+            <ul class="social">
+                <li><a href=""><i class="fa fa-github"></i></a></li>
+                <li><a href=""><i class="fa fa-facebook"></i></a></li>
+                <li><a href=""><i class="fa fa-weibo"></i></a></li>
+                <li><a href=""><i class="fa fa-qq"></i></a></li>
+                <li><a href=""><i class="fa fa-weixin"></i></a></li>
+            </ul>
+            <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 star&nbsp;
+      - <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+        </div>
+    </div>
+</aside>
+      <section id="main" class="outer ml-has-sidebar"><article id="post-2015-05-16-JavaScript-Scope" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript作用域
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2015/05/16/2015-05-16-JavaScript-Scope/" class="article-date">
+  <time datetime="2015-05-15T16:00:00.000Z" itemprop="datePublished">2015-05-16</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/code/">code</a><span>></span><a class="article-category-link" href="/categories/code/JS/">JS</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>变量是所有编程语言中最基础的概念，我们通过存储，修改变量的值来运行程序。那么变量是如何存放的，如何访问变量？我们将这些规则称为作用域。</p>
+<p>看一个例子&nbsp;<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a =<span class="number">2</span>;</span><br></pre></td></tr></table></figure></p>
+<p>我们看到这段代码，会认为它是一个语句。但是Javascript的引擎并不这么认为，它首先看到</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a</span><br></pre></td></tr></table></figure>
+<p>看到这个之后就去查询作用域是否存在 变量a ，如果作用域存在变量a，那么它就会忽略这个声明，否则就将a加入作用域。接下来再处理</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>的赋值。</p>
+<blockquote>
+<p>JavaScript中的函数运行在它们被定义的作用域里,而不是它们被执行的作用域里</p>
+</blockquote>
+<p>在JS中，每一个函数都有一个作用域，进入一个函数就可以访问到这个函数作用域内的变量。在作用域中， 一个声明出现的位置并不重要。因为JS会在最初的时候就将作用域内声明的变量添加到作用域当中去，并且函数声明的优先级要高于普通变量的声明 (同一个变量既有函数声明又有变量声明，那么变量声明会被忽略) 。</p>
+<p>举几个例子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">foo();</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log( a ); <span class="comment">// undefined</span></span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里有两个变量,foo和a，虽然声明都位于访问之后，但是访问的时候并不会发生错误，因为程序执行最开始做的就是将声明提到最前面，等价于下面这段代码。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.log( a ); <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line">    a = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo();</span><br></pre></td></tr></table></figure></p>
+<p>再看一个例子<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">foo(); <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> foo;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log( <span class="number">1</span> );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log( <span class="number">2</span> );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>有一个变量叫做foo,有一个函数变量也叫foo，那么变量foo就会被忽略。最后一个并不是声明，而是赋值，所以并不会有变量提升的过程。</p>
+<p>JS中不存在{}框住的块状作用域，但是with，try/catch具有的是块状作用域，在ES6中引入的let关键字将为Javascript带来块状作用域。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">if</span> (foo) &#123;</span><br><span class="line">    <span class="keyword">let</span> bar = foo * <span class="number">2</span>;</span><br><span class="line">    bar = something( bar );</span><br><span class="line">    <span class="built_in">console</span>.log( bar );</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log( bar ); <span class="comment">// ReferenceError</span></span><br></pre></td></tr></table></figure></p>
+<p>最后再看一个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log( a ); <span class="comment">// 2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">3</span>;</span><br><span class="line">    foo();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">bar();</span><br></pre></td></tr></table></figure>
+<p>这里bar执行的结果，或者说在控制台输出的结果是什么呢？我们最初的时候引用了一句Javascript权威指南中的一句话，JavaScript中的函数运行在它们被定义的作用域里,而不是它们被执行的作用域里。通过这个例子应该明白这句话的意思，它说的是foo在哪里执行并不重要，它访问的作用域是定义时候就被确定下来了的。它具有的是静态作用域。发明this就是为了让Javascript具有动态作用域。</p>
+<p>至于作用域链，应该还是很好理解的，可以看看<a href="http://www.laruence.com/2009/05/28/863.html" target="_blank" rel="external">Javascript作用域原理</a>,比较深入的解释了作用域的原理。</p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/作用域/">作用域</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/05/30/2015-05-30-JavaScript-Closure/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          JavaScript 闭包
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/05/10/2015-05-10-IFE-task2-summary/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaScript 基础&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-2015-05-16-JavaScript-Scope" data-title="JavaScript作用域" data-url="http://yoursite.com/2015/05/16/2015-05-16-JavaScript-Scope/">
+
+    </div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:'starow'};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</section>
+</section>
+    </div>
+    
+
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>

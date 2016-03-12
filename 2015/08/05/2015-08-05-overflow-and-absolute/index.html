@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>漫谈CSS—overflow和absolute - 徐鑫鑫的BLOG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="问题是这样的，想做一个box，这个box有一个边框，我想在这个边框上放上一个小按钮，譬如说 close按钮。于是我写了一个absolute的按钮，把它定位到box的边框上。这时候我看不到这个button，它去哪里了？debug窗口可以看到这个元素是有高度，宽度的。
+这时候我发现box上有一个overflow：hidden属性， 它不会被hidden了吧？
+果不其然去掉了这个属性，小按钮就重新出现了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="漫谈CSS—overflow和absolute">
+<meta property="og:url" content="http://yoursite.com/2015/08/05/2015-08-05-overflow-and-absolute/index.html">
+<meta property="og:site_name" content="徐鑫鑫的BLOG">
+<meta property="og:description" content="问题是这样的，想做一个box，这个box有一个边框，我想在这个边框上放上一个小按钮，譬如说 close按钮。于是我写了一个absolute的按钮，把它定位到box的边框上。这时候我看不到这个button，它去哪里了？debug窗口可以看到这个元素是有高度，宽度的。
+这时候我发现box上有一个overflow：hidden属性， 它不会被hidden了吧？
+果不其然去掉了这个属性，小按钮就重新出现了">
+<meta property="og:updated_time" content="2016-01-07T11:04:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="漫谈CSS—overflow和absolute">
+<meta name="twitter:description" content="问题是这样的，想做一个box，这个box有一个边框，我想在这个边框上放上一个小按钮，譬如说 close按钮。于是我写了一个absolute的按钮，把它定位到box的边框上。这时候我看不到这个button，它去哪里了？debug窗口可以看到这个元素是有高度，宽度的。
+这时候我发现box上有一个overflow：hidden属性， 它不会被hidden了吧？
+果不其然去掉了这个属性，小按钮就重新出现了">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/webfonts/font-awesome-4.3.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+  <script src="/js/jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="container">
+    <div class="wrap">
+      <button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
+      <aside id="sidebar">
+    <div class="sidebar-wrap">
+        <button class="hide-button">
+            <i class="fa fa-angle-double-left"></i>
+        </button>
+        <button class="close-button fa fa-fw fa-close"></button>
+        <div class="logo">
+            <span>Star</span>
+            <img src="/images/logo-2.png" alt="LOGO"/>
+        </div>
+        <div class="intro">鲜花与掌声，献给时光</div>
+        <nav id="sidebar-nav">
+            
+            <a href="/"><i class="fa fa-bars"></i>Home</a>
+            
+            <a href="/archives"><i class="fa fa-bars"></i>Archives</a>
+            
+            <a href="/categories"><i class="fa fa-bars"></i>Categories</a>
+            
+            <a href="/tags"><i class="fa fa-bars"></i>Tags</a>
+            
+        </nav>
+        <div id="sidebar-bottom">
+            <ul class="social">
+                <li><a href=""><i class="fa fa-github"></i></a></li>
+                <li><a href=""><i class="fa fa-facebook"></i></a></li>
+                <li><a href=""><i class="fa fa-weibo"></i></a></li>
+                <li><a href=""><i class="fa fa-qq"></i></a></li>
+                <li><a href=""><i class="fa fa-weixin"></i></a></li>
+            </ul>
+            <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 star&nbsp;
+      - <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+        </div>
+    </div>
+</aside>
+      <section id="main" class="outer ml-has-sidebar"><article id="post-2015-08-05-overflow-and-absolute" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      漫谈CSS—overflow和absolute
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2015/08/05/2015-08-05-overflow-and-absolute/" class="article-date">
+  <time datetime="2015-08-04T16:00:00.000Z" itemprop="datePublished">2015-08-05</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/code/">code</a><span>></span><a class="article-category-link" href="/categories/code/CSS/">CSS</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>问题是这样的，想做一个box，这个box有一个边框，我想在这个边框上放上一个小按钮，譬如说 close按钮。于是我写了一个absolute的按钮，把它定位到box的边框上。这时候我看不到这个button，它去哪里了？debug窗口可以看到这个元素是有高度，宽度的。</p>
+<p>这时候我发现box上有一个overflow：hidden属性， 它不会被hidden了吧？</p>
+<p>果不其然去掉了这个属性，小按钮就重新出现了。</p>
+<p>去测试了一下，确定了position是从padding的地方开始定位的，top：0，left：0会让元素左上角和padding左上角重合，如果有overflow：hidden属性在padding外面的那部分就被hidden了.</p>
+<p>然后我去掉它父元素的定位属性，让这个button按照body定位，这个时候它又能出现在父元素的外面了。</p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/absolute/">absolute</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/overflow/">overflow</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/08/10/2015-08-09-promise-in-JS/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          遇见Promise
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/09/2015-07-09-you-need-know-about-z-index/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">漫谈CSS—z-index&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-2015-08-05-overflow-and-absolute" data-title="漫谈CSS—overflow和absolute" data-url="http://yoursite.com/2015/08/05/2015-08-05-overflow-and-absolute/">
+
+    </div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:'starow'};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</section>
+</section>
+    </div>
+    
+
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
