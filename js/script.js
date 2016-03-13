@@ -61,5 +61,10 @@
     $('#sidebar').removeClass('sidebar--open');
   })
 
+  $('#search-area').on('keyup',function (event) {
 
+    if(event.keyCode == 13){
+      window.open("http://www.google.com//#newwindow=1&safe=strict&q="+$(this).val()+' site:xuxinxin.github.io', "topFrame");
+    }
+  })
 })(jQuery);
