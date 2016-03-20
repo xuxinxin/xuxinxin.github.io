@@ -5,22 +5,22 @@
   
   <title>数据绑定 - 徐鑫鑫的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="上次分析了模板字符串的替换，今天分析与这个很类似但是更进难一点的内容，数据绑定。数据绑定分为单向绑定和双向绑定，今天我们要分析的是单向数据绑定。
-单向数据绑定模板字符串的替换就是一种单向数据绑定：
-123&amp;lt;div id=&quot;my_view&quot;&amp;gt; &amp;#123;&amp;#123; name &amp;#125;&amp;#125; is &amp;#123;&amp;#123; age &amp;#125;&amp;#125; years old">
+  <meta name="description" content="上次分析了模板字符串的替换，今天分析数据绑定技术。数据绑定是MVVM框架非常吸引人的一个特性，相信大家都不陌生，如果你没有听过，你可以先阅读一下这篇文章谈谈JavaScript中的双向数据绑定，对背景知识做一个了解。
+数据绑定模板字符串的替换是一种单向数据绑定：
+123&amp;lt;div id=&quot;my_view&quot;&amp;gt; &amp;#123;&amp;#123; name &amp;#125;&amp;#125; is &amp;#123;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据绑定">
 <meta property="og:url" content="http://yoursite.com/2016/03/13/2016-03-13-vue-002/index.html">
 <meta property="og:site_name" content="徐鑫鑫的BLOG">
-<meta property="og:description" content="上次分析了模板字符串的替换，今天分析与这个很类似但是更进难一点的内容，数据绑定。数据绑定分为单向绑定和双向绑定，今天我们要分析的是单向数据绑定。
-单向数据绑定模板字符串的替换就是一种单向数据绑定：
-123&amp;lt;div id=&quot;my_view&quot;&amp;gt; &amp;#123;&amp;#123; name &amp;#125;&amp;#125; is &amp;#123;&amp;#123; age &amp;#125;&amp;#125; years old">
-<meta property="og:updated_time" content="2016-03-13T10:58:26.000Z">
+<meta property="og:description" content="上次分析了模板字符串的替换，今天分析数据绑定技术。数据绑定是MVVM框架非常吸引人的一个特性，相信大家都不陌生，如果你没有听过，你可以先阅读一下这篇文章谈谈JavaScript中的双向数据绑定，对背景知识做一个了解。
+数据绑定模板字符串的替换是一种单向数据绑定：
+123&amp;lt;div id=&quot;my_view&quot;&amp;gt; &amp;#123;&amp;#123; name &amp;#125;&amp;#125; is &amp;#123;">
+<meta property="og:updated_time" content="2016-03-20T03:16:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据绑定">
-<meta name="twitter:description" content="上次分析了模板字符串的替换，今天分析与这个很类似但是更进难一点的内容，数据绑定。数据绑定分为单向绑定和双向绑定，今天我们要分析的是单向数据绑定。
-单向数据绑定模板字符串的替换就是一种单向数据绑定：
-123&amp;lt;div id=&quot;my_view&quot;&amp;gt; &amp;#123;&amp;#123; name &amp;#125;&amp;#125; is &amp;#123;&amp;#123; age &amp;#125;&amp;#125; years old">
+<meta name="twitter:description" content="上次分析了模板字符串的替换，今天分析数据绑定技术。数据绑定是MVVM框架非常吸引人的一个特性，相信大家都不陌生，如果你没有听过，你可以先阅读一下这篇文章谈谈JavaScript中的双向数据绑定，对背景知识做一个了解。
+数据绑定模板字符串的替换是一种单向数据绑定：
+123&amp;lt;div id=&quot;my_view&quot;&amp;gt; &amp;#123;&amp;#123; name &amp;#125;&amp;#125; is &amp;#123;">
   
   
     <link rel="icon" href="/favicon.png">
@@ -106,8 +106,8 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>上次分析了模板字符串的替换，今天分析与这个很类似但是更进难一点的内容，数据绑定。数据绑定分为单向绑定和双向绑定，今天我们要分析的是单向数据绑定。</p>
-<h2 id="u5355_u5411_u6570_u636E_u7ED1_u5B9A"><a href="#u5355_u5411_u6570_u636E_u7ED1_u5B9A" class="headerlink" title="单向数据绑定"></a>单向数据绑定</h2><p>模板字符串的替换就是一种单向数据绑定：</p>
+        <p>上次分析了模板字符串的替换，今天分析数据绑定技术。数据绑定是MVVM框架非常吸引人的一个特性，相信大家都不陌生，如果你没有听过，你可以先阅读一下这篇文章<a href="http://www.html-js.com/article/Study-of-twoway-data-binding-JavaScript-talk-about-JavaScript-every-day" target="_blank" rel="external">谈谈JavaScript中的双向数据绑定</a>，对背景知识做一个了解。</p>
+<h2 id="u6570_u636E_u7ED1_u5B9A"><a href="#u6570_u636E_u7ED1_u5B9A" class="headerlink" title="数据绑定"></a>数据绑定</h2><p>模板字符串的替换是一种单向数据绑定：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"my_view"</span>&gt;</span></span><br><span class="line"> &#123;&#123; name &#125;&#125; is &#123;&#123; age &#125;&#125; years old.</span><br><span class="line"> <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>将这里的 <code>name</code> 和 <code>age</code> 绑定上对应的数据。这一部分的实现方法，昨天已经分析过了。</p>
 <p>具体的思路是首先进行正则匹配将模板字符串捕获到，替换成 <code>span</code> 标签，然后监听输入对象，做一个访问控制，当给变量赋值的时候，就去更新对应 <code>span</code> 里面的值。</p>
@@ -195,6 +195,14 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2016/03/20/2016-03-20-vue-003/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          指令分析-sd-each
+        
+      </div>
+    </a>
   
   
     <a href="/2016/03/12/2016-03-12-vue-001/" id="article-nav-older" class="article-nav-link-wrap">

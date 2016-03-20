@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>指令分析-sd-each - 徐鑫鑫的BLOG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="通过标签上”sd-“开头的指令绑定数据与操作。sd-each是众多指令中的一个，可以实现标签的循环输出。例如 sd-each = &amp;quot;todo:todos&amp;quot; 就是要将 todos 数组中的每一个对象都输出。
+概述有下面一段HTML片段，要将对应的对象的值正确的绑定到对应的标签当中。
+1234567891011121314151617&amp;lt;div id=&quot;app&quot; sd-cont">
+<meta property="og:type" content="article">
+<meta property="og:title" content="指令分析-sd-each">
+<meta property="og:url" content="http://yoursite.com/2016/03/20/2016-03-20-vue-003/index.html">
+<meta property="og:site_name" content="徐鑫鑫的BLOG">
+<meta property="og:description" content="通过标签上”sd-“开头的指令绑定数据与操作。sd-each是众多指令中的一个，可以实现标签的循环输出。例如 sd-each = &amp;quot;todo:todos&amp;quot; 就是要将 todos 数组中的每一个对象都输出。
+概述有下面一段HTML片段，要将对应的对象的值正确的绑定到对应的标签当中。
+1234567891011121314151617&amp;lt;div id=&quot;app&quot; sd-cont">
+<meta property="og:updated_time" content="2016-03-20T05:34:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="指令分析-sd-each">
+<meta name="twitter:description" content="通过标签上”sd-“开头的指令绑定数据与操作。sd-each是众多指令中的一个，可以实现标签的循环输出。例如 sd-each = &amp;quot;todo:todos&amp;quot; 就是要将 todos 数组中的每一个对象都输出。
+概述有下面一段HTML片段，要将对应的对象的值正确的绑定到对应的标签当中。
+1234567891011121314151617&amp;lt;div id=&quot;app&quot; sd-cont">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/webfonts/font-awesome-4.3.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+  <script src="/js/jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="container">
+    <div class="wrap">
+      <button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
+      <aside id="sidebar">
+    <div class="sidebar-wrap">
+        <button class="hide-button">
+            <i class="fa fa-angle-double-left"></i>
+        </button>
+        <button class="close-button fa fa-fw fa-close"></button>
+        <div class="logo">
+            <span>Star</span>
+            <img src="/images/logo-2.png" alt="LOGO"/>
+        </div>
+        <div class="intro">鲜花与掌声，献给时光</div>
+        <nav id="sidebar-nav">
+            
+            <a href="/"><i class="fa fa-bars"></i>Home</a>
+            
+            <a href="/archives"><i class="fa fa-bars"></i>Archives</a>
+            
+            <a href="/categories"><i class="fa fa-bars"></i>Categories</a>
+            
+            <a href="/tags"><i class="fa fa-bars"></i>Tags</a>
+            
+        </nav>
+        <div id="sidebar-bottom">
+            <ul class="social">
+                <li><a href=""><i class="fa fa-github"></i></a></li>
+                <li><a href=""><i class="fa fa-facebook"></i></a></li>
+                <li><a href=""><i class="fa fa-weibo"></i></a></li>
+                <li><a href=""><i class="fa fa-qq"></i></a></li>
+                <li><a href=""><i class="fa fa-weixin"></i></a></li>
+            </ul>
+            <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 star&nbsp;
+      - <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+        </div>
+    </div>
+</aside>
+      <section id="main" class="outer ml-has-sidebar"><article id="post-2016-03-20-vue-003" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      指令分析-sd-each
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/03/20/2016-03-20-vue-003/" class="article-date">
+  <time datetime="2016-03-19T16:00:00.000Z" itemprop="datePublished">2016-03-20</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/code/">code</a><span>></span><a class="article-category-link" href="/categories/code/Vue-代码笔记/">Vue 代码笔记</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>通过标签上”sd-“开头的指令绑定数据与操作。sd-each是众多指令中的一个，可以实现标签的循环输出。例如 <code>sd-each = &quot;todo:todos&quot;</code> 就是要将 todos 数组中的每一个对象都输出。</p>
+<h2 id="u6982_u8FF0"><a href="#u6982_u8FF0" class="headerlink" title="概述"></a>概述</h2><p>有下面一段HTML片段，要将对应的对象的值正确的绑定到对应的标签当中。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"app"</span> <span class="attribute">sd-controller</span>=<span class="value">"TodoList"</span> <span class="attribute">sd-on</span>=<span class="value">"click:changeMessage | delegate .button"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">p</span> <span class="attribute">sd-text</span>=<span class="value">"msg | capitalize"</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">p</span> <span class="attribute">sd-text</span>=<span class="value">"msg | uppercase"</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">p</span> <span class="attribute">sd-on</span>=<span class="value">"click:remove"</span>&gt;</span>bye<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">p</span> <span class="attribute">sd-text</span>=<span class="value">"total | money"</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">"button"</span>&gt;</span>Change Message<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">p</span> <span class="attribute">sd-class</span>=<span class="value">"red:error"</span> <span class="attribute">sd-show</span>=<span class="value">"error"</span>&gt;</span>Error<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">ul</span> <span class="attribute">sd-show</span>=<span class="value">"todos"</span>&gt;</span></span><br><span class="line">            	<span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"todo"</span></span><br><span class="line">                    <span class="attribute">sd-controller</span>=<span class="value">"Todo"</span></span><br><span class="line">                    <span class="attribute">sd-each</span>=<span class="value">"todo:todos"</span></span><br><span class="line">                    <span class="attribute">sd-class</span>=<span class="value">"done:todo.done"</span></span><br><span class="line">                    <span class="attribute">sd-on</span>=<span class="value">"click:changeMessage, click:todo.toggle"</span></span><br><span class="line">                    <span class="attribute">sd-text</span>=<span class="value">"todo.title"</span></span><br><span class="line">                &gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>数据绑定的原理，我们上一节已经分析过了。总体来说分为以下几个步骤，首先是提取标签中的指令，分析指令，将指令中的参数提取出来，为这些指令和标签做绑定操作，通过绑定操作可以实现对象的属性与标签的值进行绑定，或者将事件处理函数与标签的事件进行绑定。</p>
+<p>回到上面的片段，ul中的li有一个sd-each指令，是将todos数组的内容与标签相绑定。我们如何去实现呢？</p>
+<h2 id="u529F_u80FD_u8BBE_u8BA1"><a href="#u529F_u80FD_u8BBE_u8BA1" class="headerlink" title="功能设计"></a>功能设计</h2><p>sd-each 节点也和普通的节点一样，可以绑定诸如 sd-text，sd-class等指令。它的不同之处在于它的数目等于绑定的数组的长度。</p>
+<p>现在，整个框架的生命周期分为两个阶段。一个是绑定阶段，一个是更新数据阶段。框架首先将指令收集起来，然后再在数据赋值的时候更新DOM节点。</p>
+<p>针对sd-each，首先在绑定阶段在li这个位置做一个标记，之后在更新阶段在标记位置插入绑定了数据的节点。</p>
+<p>除去sd-each指令，这个节点与普通节点一样，我们循环将其他指令进行正确的绑定，输出正确的DOM节点，插入指定位置。</p>
+<p>Seed对象在传入节点和数据之后可以生成绑定了数据的节点，因此，我们可以将sd-each的节点作为Seed对象的输入，生成一个绑定了对象的节点输出。</p>
+<h2 id="u4EE3_u7801_u8BBE_u8BA1"><a href="#u4EE3_u7801_u8BBE_u8BA1" class="headerlink" title="代码设计"></a>代码设计</h2><p>通过文字解答有些复杂，直接看each指令的代码吧:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">each: &#123;</span><br><span class="line">        bind: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.el.removeAttribute(config.prefix + <span class="string">'-each'</span>)</span><br><span class="line">            <span class="keyword">this</span>.prefixRE = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'^'</span> + <span class="keyword">this</span>.arg + <span class="string">'.'</span>)</span><br><span class="line">            <span class="keyword">var</span> ctn = <span class="keyword">this</span>.container = <span class="keyword">this</span>.el.parentNode</span><br><span class="line">            <span class="keyword">this</span>.marker = <span class="built_in">document</span>.createComment(<span class="string">'sd-each-'</span> + <span class="keyword">this</span>.arg + <span class="string">'-marker'</span>)</span><br><span class="line">            ctn.insertBefore(<span class="keyword">this</span>.marker, <span class="keyword">this</span>.el)</span><br><span class="line">            ctn.removeChild(<span class="keyword">this</span>.el)</span><br><span class="line">            <span class="keyword">this</span>.childSeeds = []</span><br><span class="line">        &#125;,</span><br><span class="line">        update: <span class="function"><span class="keyword">function</span> (<span class="params">collection</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.childSeeds.length) &#123;</span><br><span class="line">                <span class="keyword">this</span>.childSeeds.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">child</span>) </span>&#123;</span><br><span class="line">                    child.destroy()</span><br><span class="line">                &#125;)</span><br><span class="line">                <span class="keyword">this</span>.childSeeds = []</span><br><span class="line">            &#125;</span><br><span class="line">            watchArray(collection, <span class="keyword">this</span>.mutate.bind(<span class="keyword">this</span>))</span><br><span class="line">            <span class="keyword">var</span> self = <span class="keyword">this</span></span><br><span class="line">            collection.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">item, i</span>) </span>&#123;</span><br><span class="line">                self.childSeeds.push(self.buildItem(item, i, collection))</span><br><span class="line">            &#125;)</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'collection creation done.'</span>)</span><br><span class="line">        &#125;,</span><br><span class="line">        mutate: <span class="function"><span class="keyword">function</span> (<span class="params">mutation</span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(mutation)</span><br><span class="line">        &#125;,</span><br><span class="line">        buildItem: <span class="function"><span class="keyword">function</span> (<span class="params">data, index, collection</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> Seed = <span class="built_in">require</span>(<span class="string">'seed/src/seed.js'</span>),</span><br><span class="line">                node = <span class="keyword">this</span>.el.cloneNode(<span class="literal">true</span>)</span><br><span class="line">            <span class="keyword">var</span> spore = <span class="keyword">new</span> Seed(node, data, &#123;</span><br><span class="line">                    eachPrefixRE: <span class="keyword">this</span>.prefixRE,</span><br><span class="line">                    parentSeed: <span class="keyword">this</span>.seed</span><br><span class="line">                &#125;)</span><br><span class="line">            <span class="keyword">this</span>.container.insertBefore(spore.el, <span class="keyword">this</span>.marker)</span><br><span class="line">            collection[index] = spore.scope</span><br><span class="line">            <span class="keyword">return</span> spore</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>bind函数，是在绑定阶段运行的钩子函数。创建一个注释节点作为标记，在数据更新之后将节点插入标记节点之前。</p>
+<p>还有几个细节，在bind函数中提取了sd-each指令的参数todo,todo是其他指定绑定值的一个前缀。创建了一个childSeeds节点，存放绑定后的Seed对象，在下一次绑定的时候要先将这些节点清除。</p>
+<p>update函数，是在更新阶段调用的函数。collection参数是传入的数据数组，对collection中的每一个元素，调用buildItem函数去生成绑定数据的节点。</p>
+<p>buildItem函数，将数据以及sd-each节点进行绑定，生成绑定后的对象spore，对象的el属性是要输出的DOM节点，插入标记节点之前，并且将spore对象存入childSeeds数组。</p>
+<h2 id="u5D4C_u5957_u4F5C_u7528_u57DF"><a href="#u5D4C_u5957_u4F5C_u7528_u57DF" class="headerlink" title="嵌套作用域"></a>嵌套作用域</h2><p>sd-each指令在上一节进行了详细的分析，主要思想就是将sd-each节点根据数据数组进行数据绑定。</p>
+<p>如果节点绑定的sd-text不是todo.title而是父级作用域中的msg，需要怎么处理？</p>
+<p>在给msg赋值的时候，sd-each的节点要随之数据进行更新。但是如果我们的sd-each的赋值操作在msg的赋值操作之后，那么我们就无法正确的解析sd-each节点，并且绑定上数据。</p>
+<p>所以，sd-each指令的数据更新工作要比其他的指令要早，在其他指令的绑定阶段，我们的sd-each节点就要进行数据的更新。因为sd-each节点的数据更新阶段才会解析指令。</p>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>sd-each指令的实现，要通过调用Seed构造函数生成节点，并且在更新阶段才调用这一构造函数，因此为了实现作用域的嵌套，我们要在其他数据的绑定阶段就将这一指令的数据进行更新。</p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/03/13/2016-03-13-vue-002/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据绑定&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-2016-03-20-vue-003" data-title="指令分析-sd-each" data-url="http://yoursite.com/2016/03/20/2016-03-20-vue-003/">
+
+    </div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:'starow'};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</section>
+</section>
+    </div>
+    
+
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
