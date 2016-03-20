@@ -5,22 +5,25 @@
   
   <title>指令分析-sd-each - 徐鑫鑫的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="通过标签上”sd-“开头的指令绑定数据与操作。sd-each是众多指令中的一个，可以实现标签的循环输出。例如 sd-each = &amp;quot;todo:todos&amp;quot; 就是要将 todos 数组中的每一个对象都输出。
+  <meta name="description" content="代码与效果
+通过标签上”sd-“开头的指令绑定数据与操作。sd-each是众多指令中的一个，可以实现标签的循环输出。例如 sd-each = &amp;quot;todo:todos&amp;quot; 就是要将 todos 数组中的每一个对象都输出。
 概述有下面一段HTML片段，要将对应的对象的值正确的绑定到对应的标签当中。
-1234567891011121314151617&amp;lt;div id=&quot;app&quot; sd-cont">
+1234567891011121314151617&amp;lt;div id=&quot;app&quot; s">
 <meta property="og:type" content="article">
 <meta property="og:title" content="指令分析-sd-each">
 <meta property="og:url" content="http://yoursite.com/2016/03/20/2016-03-20-vue-003/index.html">
 <meta property="og:site_name" content="徐鑫鑫的BLOG">
-<meta property="og:description" content="通过标签上”sd-“开头的指令绑定数据与操作。sd-each是众多指令中的一个，可以实现标签的循环输出。例如 sd-each = &amp;quot;todo:todos&amp;quot; 就是要将 todos 数组中的每一个对象都输出。
+<meta property="og:description" content="代码与效果
+通过标签上”sd-“开头的指令绑定数据与操作。sd-each是众多指令中的一个，可以实现标签的循环输出。例如 sd-each = &amp;quot;todo:todos&amp;quot; 就是要将 todos 数组中的每一个对象都输出。
 概述有下面一段HTML片段，要将对应的对象的值正确的绑定到对应的标签当中。
-1234567891011121314151617&amp;lt;div id=&quot;app&quot; sd-cont">
-<meta property="og:updated_time" content="2016-03-20T05:34:05.000Z">
+1234567891011121314151617&amp;lt;div id=&quot;app&quot; s">
+<meta property="og:updated_time" content="2016-03-20T05:44:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="指令分析-sd-each">
-<meta name="twitter:description" content="通过标签上”sd-“开头的指令绑定数据与操作。sd-each是众多指令中的一个，可以实现标签的循环输出。例如 sd-each = &amp;quot;todo:todos&amp;quot; 就是要将 todos 数组中的每一个对象都输出。
+<meta name="twitter:description" content="代码与效果
+通过标签上”sd-“开头的指令绑定数据与操作。sd-each是众多指令中的一个，可以实现标签的循环输出。例如 sd-each = &amp;quot;todo:todos&amp;quot; 就是要将 todos 数组中的每一个对象都输出。
 概述有下面一段HTML片段，要将对应的对象的值正确的绑定到对应的标签当中。
-1234567891011121314151617&amp;lt;div id=&quot;app&quot; sd-cont">
+1234567891011121314151617&amp;lt;div id=&quot;app&quot; s">
   
   
     <link rel="icon" href="/favicon.png">
@@ -106,7 +109,8 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>通过标签上”sd-“开头的指令绑定数据与操作。sd-each是众多指令中的一个，可以实现标签的循环输出。例如 <code>sd-each = &quot;todo:todos&quot;</code> 就是要将 todos 数组中的每一个对象都输出。</p>
+        <p><a href="http://codepen.io/starow/pen/aNJmBg" target="_blank" rel="external">代码与效果</a></p>
+<p>通过标签上”sd-“开头的指令绑定数据与操作。sd-each是众多指令中的一个，可以实现标签的循环输出。例如 <code>sd-each = &quot;todo:todos&quot;</code> 就是要将 todos 数组中的每一个对象都输出。</p>
 <h2 id="u6982_u8FF0"><a href="#u6982_u8FF0" class="headerlink" title="概述"></a>概述</h2><p>有下面一段HTML片段，要将对应的对象的值正确的绑定到对应的标签当中。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"app"</span> <span class="attribute">sd-controller</span>=<span class="value">"TodoList"</span> <span class="attribute">sd-on</span>=<span class="value">"click:changeMessage | delegate .button"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">p</span> <span class="attribute">sd-text</span>=<span class="value">"msg | capitalize"</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">p</span> <span class="attribute">sd-text</span>=<span class="value">"msg | uppercase"</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">p</span> <span class="attribute">sd-on</span>=<span class="value">"click:remove"</span>&gt;</span>bye<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">p</span> <span class="attribute">sd-text</span>=<span class="value">"total | money"</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">"button"</span>&gt;</span>Change Message<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">p</span> <span class="attribute">sd-class</span>=<span class="value">"red:error"</span> <span class="attribute">sd-show</span>=<span class="value">"error"</span>&gt;</span>Error<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">ul</span> <span class="attribute">sd-show</span>=<span class="value">"todos"</span>&gt;</span></span><br><span class="line">            	<span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"todo"</span></span><br><span class="line">                    <span class="attribute">sd-controller</span>=<span class="value">"Todo"</span></span><br><span class="line">                    <span class="attribute">sd-each</span>=<span class="value">"todo:todos"</span></span><br><span class="line">                    <span class="attribute">sd-class</span>=<span class="value">"done:todo.done"</span></span><br><span class="line">                    <span class="attribute">sd-on</span>=<span class="value">"click:changeMessage, click:todo.toggle"</span></span><br><span class="line">                    <span class="attribute">sd-text</span>=<span class="value">"todo.title"</span></span><br><span class="line">                &gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>数据绑定的原理，我们上一节已经分析过了。总体来说分为以下几个步骤，首先是提取标签中的指令，分析指令，将指令中的参数提取出来，为这些指令和标签做绑定操作，通过绑定操作可以实现对象的属性与标签的值进行绑定，或者将事件处理函数与标签的事件进行绑定。</p>
